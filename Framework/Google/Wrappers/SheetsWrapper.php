@@ -16,7 +16,9 @@ use Google_Service_Sheets;
  * @author Raoul de Grunt
  * @package Framework\Google
  * @link https://github.com/googleapis/google-api-php-client
- * @version 1.0.0
+ * @uses ServiceAccountBase 1.0.0
+ * @uses SheetsWrapperInterface 1.0.0
+ * @version 1.0.1
  */
 class SheetsWrapper extends ServiceAccountBase implements SheetsWrapperInterface
 {

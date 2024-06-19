@@ -9,8 +9,10 @@ require_once FRAMEWORK_DATABASE_WRAPPERS . '/MySqlWrapper.php';
  * 
  * Class that creates database wrapper objects
  * 
+ * @author Raoul de Grunt
  * @package Framework\Databases
- * @version 1.0.0
+ * @uses MySqlWrapper 1.0.0
+ * @version 1.0.1
  */
 class WrapperFactory
 {

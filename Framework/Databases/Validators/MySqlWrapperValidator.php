@@ -13,7 +13,8 @@ use Exception;
  *
  * @author Raoul de Grunt
  * @package Framework\Databases
- * @version 1.0.0
+ * @uses MySqlWrapperInterface 1.0.0
+ * @version 1.0.1
  */
 class MySqlWrapperValidator implements MySqlWrapperInterface
 {

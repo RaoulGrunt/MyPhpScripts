@@ -13,7 +13,8 @@ use Exception;
  *
  * @author Raoul de Grunt
  * @package Framework\Google
- * @version 1.0.0
+ * @uses SheetsWrapperInterface 1.0.0
+ * @version 1.0.1
  */
 class SheetsWrapperValidator implements SheetsWrapperInterface
 {

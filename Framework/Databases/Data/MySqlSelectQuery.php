@@ -11,7 +11,8 @@ require_once FRAMEWORK_DATABASE_BASECLASSES . '/SelectQueryBase.php';
  *
  * @author Raoul de Grunt
  * @package Framework\Databases
- * @version 1.0.0
+ * @uses SelectQueryBase 1.0.0
+ * @version 1.0.1
  */
 class MySqlSelectQuery extends SelectQueryBase
 {

@@ -12,7 +12,9 @@ require_once FRAMEWORK_DATABASE_DATA . '/Join.php';
  *
  * @author Raoul de Grunt
  * @package Framework\Databases
- * @version 1.0.0
+ * @uses MySqlSelectQuery 1.0.0
+ * @uses Join 1.0.0
+ * @version 1.0.1
  */
 class DataFactory
 {

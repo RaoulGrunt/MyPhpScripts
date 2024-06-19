@@ -16,7 +16,9 @@ use Exception;
  * @author Raoul de Grunt
  * @package Framework\Databases
  * @link https://www.php.net/manual/en/book.mysqli.php
- * @version 1.0.0
+ * @uses MySqlWrapperInterface 1.0.0
+ * @uses MySqlWrapperValidator 1.0.0
+ * @version 1.0.1
  */
 class MySqlWrapper implements MySqlWrapperInterface
 {
