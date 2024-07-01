@@ -13,7 +13,7 @@ use Framework\Databases as Databases;
  * 
  * @author Raoul de Grunt
  * @package Final Fantasy XII
- * @version 1.0.0
+ * @version 1.0.1
  */
 class DatabaseReader
 {
@@ -33,7 +33,7 @@ class DatabaseReader
     /**
      * Get the names from the bazaar items that the specified loot is needed for
      * 
-     * @var string $lootName The name of the loot
+     * @param string $lootName The name of the loot
      * @return string[]
      */
     public function getBazaarNames(string $lootName): array
@@ -50,7 +50,7 @@ class DatabaseReader
     /**
      * Get the loot required for the specified bazaar item
      * 
-     * @var string $bazaarName The name of the bazaar item
+     * @param string $bazaarName The name of the bazaar item
      * @return BazaarLoot[]
      */
     public function getBazaarLoot(string $bazaarName): array

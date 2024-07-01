@@ -5,14 +5,14 @@
  * 
  * @author Raoul de Grunt
  * @package Final Fantasy XII
- * @version 1.0.0
+ * @version 1.0.1
  */
 class SheetResultConverter
 {
     /**
      * Convert single column values to regular array
      * 
-     * @var string[][] $sheetResult The result from the sheet
+     * @param string[][] $sheetResult The result from the sheet
      * @return string[]
      */
     public static function convertSingleColumnValues(array $sheetResult): array

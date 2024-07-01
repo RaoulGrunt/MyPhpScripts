@@ -5,15 +5,15 @@
  * 
  * @author Raoul de Grunt
  * @package Final Fantasy XII
- * @version 1.0.0
+ * @version 1.0.1
  */
 class LootValueConverter
 {
     /**
      * Convert the specified parameters to the string for the "sell up to" cell
      * 
-     * @var int $lootRow The row for this string
-     * @var int $sellUpTo The amount to sell up to
+     * @param int $lootRow The row for this string
+     * @param int $sellUpTo The amount to sell up to
      * @return string
      */
     public static function convertToSellUpToString(int $lootRow, int $sellUpTo): string
@@ -28,7 +28,7 @@ class LootValueConverter
     /**
      * Convert the specified parameter to the string for the "needed to turn in" cell
      * 
-     * @var BazaarLoot[] The loot needed for a bazaar item
+     * @param BazaarLoot[] The loot needed for a bazaar item
      * @return string
      */
     public static function convertToNeededToTurnInString(array $bazaarLoot): string
@@ -47,7 +47,7 @@ class LootValueConverter
     /**
      * Convert the specified parameter to the string for the "needed to turn in" cell for a single loot item
      * 
-     * @var BazaarLoot[] The loot needed for a bazaar item
+     * @param BazaarLoot[] The loot needed for a bazaar item
      * @return string
      */
     private static function convertToNeededToTurnInStringSingle(array $bazaarLoot): string
@@ -62,7 +62,7 @@ class LootValueConverter
     /**
      * Convert the specified parameter to the string for the "needed to turn in" cell for two loot items
      * 
-     * @var BazaarLoot[] The loot needed for a bazaar item
+     * @param BazaarLoot[] The loot needed for a bazaar item
      * @return string
      */
     private static function convertToNeededToTurnInStringDouble(array $bazaarLoot): string
@@ -82,7 +82,7 @@ class LootValueConverter
     /**
      * Convert the specified parameter to the string for the "needed to turn in" cell for three loot items
      * 
-     * @var BazaarLoot[] The loot needed for a bazaar item
+     * @param BazaarLoot[] The loot needed for a bazaar item
      * @return string
      */
     private static function convertToNeededToTurnInStringTriple(array $bazaarLoot): string

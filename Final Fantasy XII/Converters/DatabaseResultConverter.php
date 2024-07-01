@@ -7,15 +7,15 @@ require_once FF12_FACTORIES . '/FF12Factory.php';
  * 
  * @author Raoul de Grunt
  * @package Final Fantasy XII
- * @version 1.0.0
+ * @version 1.0.1
  */
 class DatabaseResultConverter
 {
     /**
      * Convert single column values to regular array
      * 
-     * @var string[][] $databaseResult The result from the database
-     * @var string $columnName The name of the column
+     * @param string[][] $databaseResult The result from the database
+     * @param string $columnName The name of the column
      * @return string[]
      */
     public static function convertSingleColumnValues(array $databaseResult, string $columnName): array
@@ -30,7 +30,7 @@ class DatabaseResultConverter
     /**
      * Convert the bazaar loot query result
      * 
-     * @var string[][] $databaseResult The result from the database
+     * @param string[][] $databaseResult The result from the database
      * @return BazaarLoot[]
      */
     public static function convertBazaarLootResult(array $databaseResult): array

@@ -11,14 +11,14 @@ use Framework\Google as Google;
  * 
  * @author Raoul de Grunt
  * @package Final Fantasy XII
- * @version 1.0.0
+ * @version 1.0.1
  */
 class CompletionSheetWriter
 {
     /**
      * Write the information from the specified loot output
      * 
-     * @var LootOutput[] $lootOutput The output objects to write to the loot sheet row
+     * @param LootOutput[] $lootOutput The output objects to write to the loot sheet row
      */
     public function writeLootInformation(array $lootOutput)
     {
