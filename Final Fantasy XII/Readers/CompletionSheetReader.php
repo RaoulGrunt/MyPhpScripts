@@ -12,10 +12,21 @@ use Framework\Google as Google;
  * 
  * @author Raoul de Grunt
  * @package Final Fantasy XII
- * @version 1.0.0
+ * @version 1.1.0
  */
 class CompletionSheetReader
 {
+    /**
+     * Get the values from the bazaar sheet defined in the config
+     * 
+     * @return string[]
+     */
+    public function getBazaarNames(): array
+    {
+        $sheetResult = Google\WrapperFactory::createSheetsWrapper()->getValues(COMPLETION_SHEET_ID, SHEET_BAZAAR_NAME_RANGE);
+        return SheetResultConverter::convertSingleColumnValues($sheetResult);
+    }
+
     /**
      * Get the values from the loot sheet defined in the config
      * 

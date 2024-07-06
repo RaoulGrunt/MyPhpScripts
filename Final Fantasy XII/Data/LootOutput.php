@@ -1,5 +1,6 @@
 <?php
 
+require_once FF12_BASECLASSES . '/OutputBase.php';
 require_once FF12_CONVERTERS . '/LootValueConverter.php';
 
 /**
@@ -9,9 +10,9 @@ require_once FF12_CONVERTERS . '/LootValueConverter.php';
  * 
  * @author Raoul de Grunt
  * @package Final Fantasy XII
- * @version 1.0.0
+ * @version 1.1.0
  */
-class LootOutput
+class LootOutput extends OutputBase
 {
     /** @var string $lootName */
     private string $lootName;

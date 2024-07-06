@@ -2,9 +2,11 @@
 
 require_once FF12_COORDINATORS . '/CompletionSheetCoordinator.php';
 require_once FF12_READERS . '/CompletionSheetReader.php';
-require_once FF12_HANDLERS . '/BazaarLootHandler.php';
+require_once FF12_HANDLERS . '/BazaarHandler.php';
+require_once FF12_HANDLERS . '/LootHandler.php';
 require_once FF12_READERS . '/DatabaseReader.php';
 require_once FF12_DATA . '/BazaarLoot.php';
+require_once FF12_DATA . '/BazaarOutput.php';
 require_once FF12_DATA . '/LootOutput.php';
 require_once FF12_WRITERS . '/CompletionSheetWriter.php';
 
@@ -15,7 +17,7 @@ require_once FF12_WRITERS . '/CompletionSheetWriter.php';
  * 
  * @author Raoul de Grunt
  * @package Final Fantasy XII
- * @version 1.0.0
+ * @version 1.1.0
  */
 class FF12Factory
 {
@@ -40,13 +42,23 @@ class FF12Factory
     }
 
     /**
-     * Create a BazaarLootHandler object
+     * Create a BazaarHandler object
      * 
-     * @return BazaarLootHandler
+     * @return BazaarHandler
      */
-    public static function createBazaarLootHandler(): BazaarLootHandler
+    public static function createBazaarHandler(): BazaarHandler
     {
-        return new BazaarLootHandler();
+        return new BazaarHandler();
+    }
+
+    /**
+     * Create a LootHandler object
+     * 
+     * @return LootHandler
+     */
+    public static function createLootHandler(): LootHandler
+    {
+        return new LootHandler();
     }
 
     /**
@@ -70,6 +82,17 @@ class FF12Factory
     public static function createBazaarLoot(string $lootName, int $amount, int $sheetRow): BazaarLoot
     {
         return new BazaarLoot($lootName, $amount, $sheetRow);
+    }
+
+    /**
+     * Create a BazaarOutput object
+     * 
+     * @param array $bazaarLoot Array of bazaar loot 
+     * @return BazaarOutput
+     */
+    public static function createBazaarOutput(array $bazaarLoot): BazaarOutput
+    {
+        return new BazaarOutput($bazaarLoot);
     }
 
     /**

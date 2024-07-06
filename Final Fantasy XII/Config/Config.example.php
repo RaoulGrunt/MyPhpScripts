@@ -1,6 +1,8 @@
 <?php
 
 define('COMPLETION_SHEET_ID', '');
+define('SHEET_BAZAAR_NAME_RANGE', 'Bazaar!B2:B122');
+define('SHEET_BAZAAR_UPDATE_RANGE', 'Bazaar!D2:D122');
 define('SHEET_LOOT_NAME_RANGE', 'Loot!C2:C235');
 define('SHEET_LOOT_UPDATE_RANGE', 'Loot!D2:L235');
 
@@ -13,6 +15,7 @@ require_once(__DIR__ . '/../../Framework/Databases/Config/Config.php');
 require_once(__DIR__ . '/../../Framework/Google/Config/Config.php');
 
 define('FF12_ROOT', __DIR__ . '/..');
+define('FF12_BASECLASSES', FF12_ROOT . '/Baseclasses');
 define('FF12_CONVERTERS', FF12_ROOT . '/Converters');
 define('FF12_COORDINATORS', FF12_ROOT . '/Coordinators');
 define('FF12_DATA', FF12_ROOT . '/Data');

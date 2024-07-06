@@ -11,14 +11,28 @@ use Framework\Google as Google;
  * 
  * @author Raoul de Grunt
  * @package Final Fantasy XII
- * @version 1.0.1
+ * @version 1.1.0
  */
 class CompletionSheetWriter
 {
     /**
-     * Write the information from the specified loot output
+     * Write the information from the specified parameter to the bazaar sheet row
      * 
-     * @param LootOutput[] $lootOutput The output objects to write to the loot sheet row
+     * @param BazaarOutput[] $bazaarOutput The output objects to write
+     */
+    public function writeBazaarInformation(array $bazaarOutput)
+    {
+        $updateRows = array();
+        foreach($bazaarOutput as $bazaarRow) {
+            $updateRows[] = $bazaarRow->getUpdateRow();
+        }
+        Google\WrapperFactory::createSheetsWrapper()->update(COMPLETION_SHEET_ID, SHEET_BAZAAR_UPDATE_RANGE, $updateRows);     
+    }
+
+    /**
+     * Write the information from the specified parameter to the loot sheet row
+     * 
+     * @param LootOutput[] $lootOutput The output objects to write
      */
     public function writeLootInformation(array $lootOutput)
     {
