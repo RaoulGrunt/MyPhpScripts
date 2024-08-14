@@ -1,29 +1,27 @@
 <?php
 
-require_once FRAMEWORK_DATABASE_FACTORIES . '/DataFactory.php';
-require_once FF12_CONVERTERS . '/DatabaseResultConverter.php';
-require_once FRAMEWORK_DATABASE_FACTORIES . '/WrapperFactory.php';
+require_once SCRIPT_BASECLASSES . '/DatabaseReaderBase.php';
 
 use Framework\Databases as Databases;
 
 /**
- * DatabaseReader
+ * LootSheetDatabaseReader
  * 
- * Class that reads information from the database and converts the result
+ * Class that reads information from the database and converts the result for the loot sheet
  * 
  * @author Raoul de Grunt
  * @package Final Fantasy XII
- * @version 1.0.1
+ * @uses DatabaseReaderBase 1.0.0
+ * @uses Databases\DataFactory 1.0.0
+ * @uses DatabaseResultConverter 1.0.0
+ * @version 1.0.0
  */
-class DatabaseReader
+class LootSheetDatabaseReader extends DatabaseReaderBase
 {
-    /** @var Databases\MySqlWrapper $wrapper */
-    private Databases\MySqlWrapper $wrapper;
-
     /**
      * Constructor
      * 
-     * Set the properties
+     * Set the class properties
      */
     public function __construct()
     {
@@ -56,19 +54,6 @@ class DatabaseReader
     public function getBazaarLoot(string $bazaarName): array
     {
         $select = array('Loot.Name', 'Bazaar.Amount', 'Loot.SheetRow');
-        $from = 'Bazaar';
-        $where = 'Bazaar.Name = \'' . str_replace("'", "''", $bazaarName) . '\'';
-        $joins = array(Databases\DataFactory::createJoin('INNER', 'Loot', 'Bazaar.loot', 'Loot.Id'));
-        $selectQuery = Databases\DataFactory::createMySqlSelectQuery($select, $from, $where, $joins);
-        $databaseResult = $this->wrapper->select($selectQuery);
-        return DatabaseResultConverter::convertBazaarLootResult($databaseResult);
-    }
-
-    /**
-     * Set the properties of the class
-     */
-    private function setClassProperties()
-    {
-        $this->wrapper = Databases\WrapperFactory::createMySqlWrapper(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
+        return $this->runGetBazaarLoot($select, $bazaarName);
     }
 }

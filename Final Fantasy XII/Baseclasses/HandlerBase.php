@@ -7,7 +7,7 @@
  * 
  * @author Raoul de Grunt
  * @package Final Fantasy XII
- * @version 1.0.0
+ * @version 1.0.1
  */
 abstract class HandlerBase
 {
@@ -15,6 +15,7 @@ abstract class HandlerBase
      * Get the output for the specified list
      * 
      * @param string[] $list
+     * @return BazaarOutput[]|LootOutput[]
      */
     protected function getOutput(array $list): array
     {
@@ -29,7 +30,7 @@ abstract class HandlerBase
      * Abstract function to get the outpot for the specified element
      * 
      * @param string $elementName
-     * @return OutputBase
+     * @return BazaarOutput|LootOutput
      */
     abstract protected function getOutputFor(string $elementName): OutputBase;
 }

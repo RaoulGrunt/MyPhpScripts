@@ -1,19 +1,21 @@
 <?php
 
-require_once FF12_BASECLASSES . '/HandlerBase.php';
-require_once FF12_DATA . '/BazaarOutput.php';
-require_once FF12_FACTORIES . '/FF12Factory.php';
+require_once SCRIPT_BASECLASSES . '/HandlerBase.php';
+require_once SCRIPT_DATA . '/BazaarOutput.php';
+require_once SCRIPT_FACTORIES . '/BazaarSheetFactory.php';
 
 /**
- * BazaarHandler
+ * BazaarSheetHandler
  * 
  * Class that handles the bazaar item
  * 
  * @author Raoul de Grunt
  * @package Final Fantasy XII
+ * @uses HandlerBase 1.0.0
+ * @uses BazaarSheetFactory 1.0.0
  * @version 1.0.0
  */
-class BazaarHandler extends HandlerBase
+class BazaarSheetHandler extends HandlerBase
 {
     /**
      * Get the output for every specified bazaar item
@@ -34,8 +36,8 @@ class BazaarHandler extends HandlerBase
      */
     protected function getOutputFor(string $bazaarName): BazaarOutput
     {
-        $databaseReader = FF12Factory::createDatabaseReader();
+        $databaseReader = BazaarSheetFactory::createBazaarSheetDatabaseReader();
         $bazaarLoot = $databaseReader->getBazaarLoot($bazaarName);
-        return FF12Factory::createBazaarOutput($bazaarLoot);
+        return BazaarSheetFactory::createBazaarOutput($bazaarLoot);
     }
 }

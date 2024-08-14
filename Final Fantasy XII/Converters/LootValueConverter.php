@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Converter class that converts values to sheet functions
+ * Converter class that converts loot values to sheet functions
  * 
  * @author Raoul de Grunt
  * @package Final Fantasy XII
- * @version 1.0.1
+ * @version 1.0.2
  */
 class LootValueConverter
 {
@@ -39,7 +39,7 @@ class LootValueConverter
         } elseif (count($bazaarLoot) == 2) {
             $result = self::convertToNeededToTurnInStringDouble($bazaarLoot);
         } elseif (count($bazaarLoot) == 3) {
-            $result = self::convertToNeededToTurnInStringTriple($bazaarLoot);;
+            $result = self::convertToNeededToTurnInStringTriple($bazaarLoot);
         }
         return $result;
     }

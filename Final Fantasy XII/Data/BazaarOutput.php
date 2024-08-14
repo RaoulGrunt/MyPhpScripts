@@ -1,7 +1,7 @@
 <?php
 
-require_once FF12_BASECLASSES . '/OutputBase.php';
-require_once FF12_CONVERTERS . '/BazaarValueConverter.php';
+require_once SCRIPT_BASECLASSES . '/OutputBase.php';
+require_once SCRIPT_CONVERTERS . '/BazaarValueConverter.php';
 
 /**
  * BazaarOutput
@@ -10,7 +10,9 @@ require_once FF12_CONVERTERS . '/BazaarValueConverter.php';
  * 
  * @author Raoul de Grunt
  * @package Final Fantasy XII
- * @version 1.0.0
+ * @uses OutputBase 1.0.0
+ * @uses BazaarValueConverter 1.0.0
+ * @version 1.0.1
  */
 class BazaarOutput extends OutputBase
 {

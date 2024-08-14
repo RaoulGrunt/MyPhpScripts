@@ -1,13 +1,14 @@
 <?php
 
-require_once FF12_FACTORIES . '/FF12Factory.php';
+require_once SCRIPT_FACTORIES . '/LootSheetFactory.php';
 
 /**
  * Converter class that converts values from the FF12 database
  * 
  * @author Raoul de Grunt
  * @package Final Fantasy XII
- * @version 1.0.1
+ * @uses LootSheetFactory 1.0.0
+ * @version 1.0.2
  */
 class DatabaseResultConverter
 {
@@ -37,7 +38,7 @@ class DatabaseResultConverter
     {
         $result = array();
         foreach($databaseResult as $record) {
-            $bazaarLoot = FF12Factory::createBazaarLoot($record['Name'], $record['Amount'], $record['SheetRow']);
+            $bazaarLoot = LootSheetFactory::createBazaarLoot($record['Name'], $record['Amount'], $record['SheetRow']);
             $result[] = $bazaarLoot;
         }
         return $result;

@@ -7,7 +7,7 @@
  * 
  * @author Raoul de Grunt
  * @package Final Fantasy XII
- * @version 1.0.0
+ * @version 1.0.1
  */
 abstract class OutputBase
 {
@@ -16,5 +16,5 @@ abstract class OutputBase
      * 
      * @return string[]
      */
-    abstract function getUpdateRow(): array;
+    abstract public function getUpdateRow(): array;
 }

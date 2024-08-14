@@ -1,19 +1,21 @@
 <?php
 
-require_once FF12_BASECLASSES . '/HandlerBase.php';
-require_once FF12_DATA . '/LootOutput.php';
-require_once FF12_FACTORIES . '/FF12Factory.php';
+require_once SCRIPT_BASECLASSES . '/HandlerBase.php';
+require_once SCRIPT_DATA . '/LootOutput.php';
+require_once SCRIPT_FACTORIES . '/LootSheetFactory.php';
 
 /**
- * LootHandler
+ * LootSheetHandler
  * 
  * Class that handles the loot for processing
  * 
  * @author Raoul de Grunt
  * @package Final Fantasy XII
- * @version 1.1.0
+ * @uses HandlerBase 1.0.0
+ * @uses LootSheetFactory 1.0.0
+ * @version 1.0.0
  */
-class LootHandler extends HandlerBase
+class LootSheetHandler extends HandlerBase
 {
     /**
      * Get the output for every specified loot item
@@ -34,12 +36,12 @@ class LootHandler extends HandlerBase
      */
     protected function getOutputFor(string $lootName): LootOutput
     {
-        $result = FF12Factory::createLootOutput($lootName);
-        $databaseReader = FF12Factory::createDatabaseReader();
+        $databaseReader = LootSheetFactory::createLootSheetDatabaseReader();
+        $output = LootSheetFactory::createLootOutput($lootName);
         foreach ($databaseReader->getBazaarNames($lootName) as $bazaarName) {
             $bazaarLoot = $databaseReader->getBazaarLoot($bazaarName);
-            $result->addBazaarLoot($bazaarLoot, $lootName);
+            $output->addBazaarLoot($bazaarLoot, $lootName);
         }
-        return $result;
+        return $output;
     }
 }

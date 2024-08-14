@@ -7,7 +7,7 @@
  * 
  * @author Raoul de Grunt
  * @package Final Fantasy XII
- * @version 1.0.0
+ * @version 1.0.1
  */
 class BazaarLoot
 {
@@ -25,7 +25,7 @@ class BazaarLoot
      * 
      * @param string $lootName Name of the loot item
      * @param int $amount The amount needed to turn in
-     * @param int $sheetRow The rownumber where the loot is in the sheet
+     * @param int $sheetRow The row number where the loot is in the sheet
      */
     public function __construct(string $lootName, int $amount, int $sheetRow)
     {

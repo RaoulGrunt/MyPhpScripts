@@ -1,7 +1,7 @@
 <?php
 
-require_once FF12_BASECLASSES . '/OutputBase.php';
-require_once FF12_CONVERTERS . '/LootValueConverter.php';
+require_once SCRIPT_BASECLASSES . '/OutputBase.php';
+require_once SCRIPT_CONVERTERS . '/LootValueConverter.php';
 
 /**
  * LootOutput
@@ -10,7 +10,9 @@ require_once FF12_CONVERTERS . '/LootValueConverter.php';
  * 
  * @author Raoul de Grunt
  * @package Final Fantasy XII
- * @version 1.1.0
+ * @uses OutputBase 1.0.0
+ * @uses LootValueConverter 1.0.0
+ * @version 1.2.0
  */
 class LootOutput extends OutputBase
 {
@@ -73,7 +75,7 @@ class LootOutput extends OutputBase
      * 
      * @return string
      */
-    public function getSellUpToSheetFunction(): string
+    public function getSellUpToSheetText(): string
     {
         $result = '1';
         $lootRow = $this->getCurrentLootRow();
