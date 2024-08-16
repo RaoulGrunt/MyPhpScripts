@@ -11,8 +11,8 @@ require_once FRAMEWORK_GOOGLE_WRAPPERS . '/SheetsWrapper.php';
  * 
  * @author Raoul de Grunt
  * @package Framework\Google
- * @uses Sheetswrapper 1.0.0
- * @version 1.0.1
+ * @uses Sheetswrapper 1.1.0
+ * @version 1.1.0
  */
 class WrapperFactory
 {

@@ -17,8 +17,9 @@ use Google_Service_Sheets;
  * @package Framework\Google
  * @link https://github.com/googleapis/google-api-php-client
  * @uses ServiceAccountBase 1.0.0
- * @uses SheetsWrapperInterface 1.0.0
- * @version 1.0.1
+ * @uses SheetsWrapperInterface 1.1.0
+ * @uses SheetsWrapperValidator 1.1.0
+ * @version 1.1.0
  */
 class SheetsWrapper extends ServiceAccountBase implements SheetsWrapperInterface
 {
@@ -64,6 +65,18 @@ class SheetsWrapper extends ServiceAccountBase implements SheetsWrapperInterface
         $valueRange->setValues($updateRows);
         $options = ['valueInputOption' => 'USER_ENTERED'];
         $this->service->spreadsheets_values->update($spreadsheetId, $range, $valueRange, $options);
+    }
+
+    /**
+     * Clear the specified range
+     * 
+     * @var string $spreadsheetId The id of the spreadsheet in Google Cloud
+     * @var string $range The range of cells to clear
+     */
+    public function clear(string $spreadsheetId, string $range)
+    {
+        $clear = new \Google_Service_Sheets_ClearValuesRequest();
+        $this->service->spreadsheets_values->clear($spreadsheetId, $range, $clear);
     }
 
     /**

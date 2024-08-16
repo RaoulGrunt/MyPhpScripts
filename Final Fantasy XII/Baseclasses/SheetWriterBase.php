@@ -11,13 +11,23 @@ use Framework\Google as Google;
  * 
  * @author Raoul de Grunt
  * @package Final Fantasy XII
- * @uses Framework\Google\WrapperFactory 1.0.0
- * @version 1.0.0
+ * @uses Framework\Google\WrapperFactory 1.1.0
+ * @version 1.1.0
  */
 abstract class SheetWriterBase
 {
     /**
-     * Write the information from the specified parameter to the loot sheet row
+     * Clear the specified range in the completion sheet
+     * 
+     * @param string $sheetRange The range to write the output to
+     */
+    protected function clearRange(string $sheetRange)
+    {
+        Google\WrapperFactory::createSheetsWrapper()->clear(COMPLETION_SHEET_ID, $sheetRange);
+    }
+
+    /**
+     * Write the information from the specified parameter to the completion sheet
      * 
      * @param string $sheetRange The range to write the output to
      * @param BazaarOutput[]|LootOutput[] $output The output objects to write
@@ -28,6 +38,6 @@ abstract class SheetWriterBase
         foreach($output as $outputRow) {
             $updateRows[] = $outputRow->getUpdateRow();
         }
-        Google\WrapperFactory::createSheetsWrapper()->update(COMPLETION_SHEET_ID, $sheetRange, $updateRows);     
+        Google\WrapperFactory::createSheetsWrapper()->update(COMPLETION_SHEET_ID, $sheetRange, $updateRows);
     }
 }

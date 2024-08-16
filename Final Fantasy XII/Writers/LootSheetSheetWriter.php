@@ -9,8 +9,8 @@ require_once SCRIPT_BASECLASSES . '/SheetWriterBase.php';
  * 
  * @author Raoul de Grunt
  * @package Final Fantasy XII
- * @uses SheetWriterBase 1.0.0
- * @version 1.0.0
+ * @uses SheetWriterBase 1.1.0
+ * @version 1.0.1
  */
 class LootSheetSheetWriter extends SheetWriterBase
 {
@@ -21,7 +21,7 @@ class LootSheetSheetWriter extends SheetWriterBase
      */
     public function writeLootInformation(array $lootOutput)
     {
-        // ToDo: Empty the entire range 
+        $this->clearRange(SHEET_LOOT_UPDATE_RANGE);
         $this->writeInformation(SHEET_LOOT_UPDATE_RANGE, $lootOutput);
     }
 }

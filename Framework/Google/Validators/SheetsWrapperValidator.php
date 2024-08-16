@@ -13,8 +13,8 @@ use Exception;
  *
  * @author Raoul de Grunt
  * @package Framework\Google
- * @uses SheetsWrapperInterface 1.0.0
- * @version 1.0.1
+ * @uses SheetsWrapperInterface 1.1.0
+ * @version 1.1.0
  */
 class SheetsWrapperValidator implements SheetsWrapperInterface
 {
@@ -36,7 +36,7 @@ class SheetsWrapperValidator implements SheetsWrapperInterface
     }
 
     /**
-     * Write the specified text to the specified cell
+     * Validate the parameters of the update() function
      * 
      * @var string $spreadsheetId The id of the spreadsheet in Google Cloud
      * @var string $range The range of cells to apply the values to
@@ -53,6 +53,22 @@ class SheetsWrapperValidator implements SheetsWrapperInterface
         }
         if (empty($updateRows)) {
             throw new Exception('GoogleWrapper::update() - Empty updateRows parameter');
+        }
+    }
+
+    /**
+     * Validate the parameters of the clear() function
+     * 
+     * @var string $spreadsheetId The id of the spreadsheet in Google Cloud
+     * @var string $range The range of cells to clear
+     */
+    public function clear(string $spreadsheetId, string $range)
+    {
+        if (empty($spreadsheetId)) {
+            throw new Exception('GoogleWrapper::clear() - Empty spreadsheetId parameter');
+        }
+        if (empty($range)) {
+            throw new Exception('GoogleWrapper::clear() - Empty range parameter');
         }
     }
 }
