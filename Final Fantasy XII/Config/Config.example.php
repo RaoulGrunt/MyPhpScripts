@@ -11,6 +11,8 @@ define('DB_USER', '');
 define('DB_PASS', '');
 define('DB_NAME', '');
 
+define('WRITE_OUTPUT', true);
+
 require_once(__DIR__ . '/../../Framework/Databases/Config/Config.php');
 require_once(__DIR__ . '/../../Framework/Google/Config/Config.php');
 
