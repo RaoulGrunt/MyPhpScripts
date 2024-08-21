@@ -14,7 +14,7 @@ use Framework\Databases as Databases;
  * @uses DatabaseReaderBase 1.0.0
  * @uses Databases\DataFactory 1.0.0
  * @uses DatabaseResultConverter 1.0.0
- * @version 1.0.0
+ * @version 1.0.1
  */
 class LootSheetDatabaseReader extends DatabaseReaderBase
 {
@@ -39,7 +39,8 @@ class LootSheetDatabaseReader extends DatabaseReaderBase
         $select = array('Bazaar.Name');
         $from = 'Bazaar';
         $where = 'Loot.Name = \'' . $lootName . '\'';
-        $joins = array(Databases\DataFactory::createJoin('INNER', 'Loot', 'Bazaar.loot', 'Loot.Id'));
+        $joins = array(Databases\DataFactory::createJoin('INNER', 'BazaarLoot', 'Bazaar.Id', 'BazaarLoot.BazaarId'),
+                       Databases\DataFactory::createJoin('INNER', 'Loot', 'BazaarLoot.LootId', 'Loot.Id'));
         $selectQuery = Databases\DataFactory::createMySqlSelectQuery($select, $from, $where, $joins);
         $databaseResult = $this->wrapper->select($selectQuery);
         return DatabaseResultConverter::convertSingleColumnValues($databaseResult, 'Name');
@@ -53,7 +54,7 @@ class LootSheetDatabaseReader extends DatabaseReaderBase
      */
     public function getBazaarLoot(string $bazaarName): array
     {
-        $select = array('Loot.Name', 'Bazaar.Amount', 'Loot.SheetRow');
+        $select = array('Loot.Name', 'BazaarLoot.Amount', 'Loot.SheetRow');
         return $this->runGetBazaarLoot($select, $bazaarName);
     }
 }

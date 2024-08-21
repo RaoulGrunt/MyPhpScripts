@@ -16,7 +16,7 @@ use Framework\Databases as Databases;
  * @uses Databases\DataFactory 1.0.0
  * @uses DatabaseResultConverter 1.0.0
  * @uses Framework\Databases\WrapperFactory 1.0.0
- * @version 1.0.0
+ * @version 1.0.1
  */
 abstract class DatabaseReaderBase
 {
@@ -32,9 +32,10 @@ abstract class DatabaseReaderBase
      */
     protected function runGetBazaarLoot(array $select, string $bazaarName): array
     {
-        $from = 'Bazaar';
+        $from = 'Loot';
         $where = 'Bazaar.Name = \'' . str_replace("'", "''", $bazaarName) . '\'';
-        $joins = array(Databases\DataFactory::createJoin('INNER', 'Loot', 'Bazaar.loot', 'Loot.Id'));
+        $joins = array(Databases\DataFactory::createJoin('INNER', 'BazaarLoot', 'Loot.Id', 'BazaarLoot.LootId'), 
+                       Databases\DataFactory::createJoin('INNER', 'Bazaar', 'BazaarLoot.BazaarId', 'Bazaar.Id'));
         $selectQuery = Databases\DataFactory::createMySqlSelectQuery($select, $from, $where, $joins);
         $databaseResult = $this->wrapper->select($selectQuery);
         return DatabaseResultConverter::convertBazaarLootResult($databaseResult);
