@@ -3,8 +3,8 @@
 define('COMPLETION_SHEET_ID', '');
 define('SHEET_BAZAAR_NAME_RANGE', 'Bazaar!B2:B122');
 define('SHEET_BAZAAR_UPDATE_RANGE', 'Bazaar!D2:D122');
-define('SHEET_LOOT_NAME_RANGE', 'Loot!C2:C235');
-define('SHEET_LOOT_UPDATE_RANGE', 'Loot!D2:L235');
+define('SHEET_LOOT_NAME_RANGE', 'Loot!B2:B235');
+define('SHEET_LOOT_UPDATE_RANGE', 'Loot!C2:I235');
 
 define('DB_SERVER', '');
 define('DB_USER', '');

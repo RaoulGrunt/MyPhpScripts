@@ -7,7 +7,7 @@
  * @package Final Fantasy XII
  * @version 1.0.0
  */
-class BazaarValueConverter
+class LootNeededValueConverter
 {
     /**
      * Convert the specified parameter to the string for a Bazaar sheet cell
@@ -18,13 +18,22 @@ class BazaarValueConverter
     public static function convertToLootString(array $bazaarLoot): string
     {
         $result = '';
-        if (count($bazaarLoot) == 1) {
-            $result = self::convertToLootStringSingle($bazaarLoot);
-        } elseif (count($bazaarLoot) == 2) {
-            $result = self::convertToLootStringDouble($bazaarLoot);
-        } elseif (count($bazaarLoot) == 3) {
-            $result = self::convertToLootStringTriple($bazaarLoot);
+        switch (count($bazaarLoot)) {
+            case 0;
+                break;
+            case 1:
+                $result = self::convertToLootStringSingle($bazaarLoot);
+                break;
+            case 2:
+                $result = self::convertToLootStringDouble($bazaarLoot);
+                break;
+            case 3:
+                $result = self::convertToLootStringTriple($bazaarLoot);
+                break;
+            default:
+                throw new Exception('LootNeededValueConverter::convertToLootString() - BazaarLoot with more than 3 items found');            
         }
+        
         return $result;
     }
 
@@ -37,7 +46,7 @@ class BazaarValueConverter
     private static function convertToLootStringSingle(array $bazaarLoot): string
     {
         $lootName = $bazaarLoot[0]->lootName();
-        $sheetRow = $bazaarLoot[0]->sheetRow();
+        $sheetRow = $bazaarLoot[0]->lootSheetRow();
         $lootAmount = $bazaarLoot[0]->amount();
         return '=
                 IF(Loot!A' . $sheetRow . ', "", 
@@ -53,10 +62,10 @@ class BazaarValueConverter
     private static function convertToLootStringDouble(array $bazaarLoot): string
     {
         $lootNameFirst = $bazaarLoot[0]->lootName();
-        $sheetRowFirst = $bazaarLoot[0]->sheetRow();
+        $sheetRowFirst = $bazaarLoot[0]->lootSheetRow();
         $lootAmountFirst = $bazaarLoot[0]->amount();
         $lootNameSecond = $bazaarLoot[1]->lootName();
-        $sheetRowSecond = $bazaarLoot[1]->sheetRow();
+        $sheetRowSecond = $bazaarLoot[1]->lootSheetRow();
         $lootAmountSecond = $bazaarLoot[1]->amount();
         return '=
                 IF(AND(Loot!A' . $sheetRowFirst . ', Loot!A' . $sheetRowSecond . '), "", 
@@ -74,13 +83,13 @@ class BazaarValueConverter
     private static function convertToLootStringTriple(array $bazaarLoot): string
     {
         $lootNameFirst = $bazaarLoot[0]->lootName();
-        $sheetRowFirst = $bazaarLoot[0]->sheetRow();
+        $sheetRowFirst = $bazaarLoot[0]->lootSheetRow();
         $lootAmountFirst = $bazaarLoot[0]->amount();
         $lootNameSecond = $bazaarLoot[1]->lootName();
-        $sheetRowSecond = $bazaarLoot[1]->sheetRow();
+        $sheetRowSecond = $bazaarLoot[1]->lootSheetRow();
         $lootAmountSecond = $bazaarLoot[1]->amount();
         $lootNameThird = $bazaarLoot[2]->lootName();
-        $sheetRowThird = $bazaarLoot[2]->sheetRow();
+        $sheetRowThird = $bazaarLoot[2]->lootSheetRow();
         $lootAmountThird = $bazaarLoot[2]->amount();
         return '=
                 IF(AND(Loot!A' . $sheetRowFirst . ', Loot!A' . $sheetRowSecond . ', Loot!A' . $sheetRowThird . '),"",

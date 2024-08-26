@@ -1,7 +1,7 @@
 <?php
 
 require_once SCRIPT_BASECLASSES . '/OutputBase.php';
-require_once SCRIPT_CONVERTERS . '/BazaarValueConverter.php';
+require_once SCRIPT_CONVERTERS . '/LootNeededValueConverter.php';
 
 /**
  * BazaarOutput
@@ -11,8 +11,8 @@ require_once SCRIPT_CONVERTERS . '/BazaarValueConverter.php';
  * @author Raoul de Grunt
  * @package Final Fantasy XII
  * @uses OutputBase 1.0.0
- * @uses BazaarValueConverter 1.0.0
- * @version 1.0.1
+ * @uses LootNeededValueConverter 1.0.0
+ * @version 1.0.2
  */
 class BazaarOutput extends OutputBase
 {
@@ -39,7 +39,7 @@ class BazaarOutput extends OutputBase
     public function getUpdateRow(): array
     {
         $result = array();
-        $result[] = BazaarValueConverter::convertToLootString($this->bazaarLoot);
+        $result[] = LootNeededValueConverter::convertToLootString($this->bazaarLoot);
         return $result;
     }
 

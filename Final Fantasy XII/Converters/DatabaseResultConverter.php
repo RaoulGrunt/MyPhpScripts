@@ -7,8 +7,8 @@ require_once SCRIPT_FACTORIES . '/LootSheetFactory.php';
  * 
  * @author Raoul de Grunt
  * @package Final Fantasy XII
- * @uses LootSheetFactory 1.0.0
- * @version 1.0.2
+ * @uses LootSheetFactory 1.1.0
+ * @version 1.0.3
  */
 class DatabaseResultConverter
 {
@@ -38,9 +38,23 @@ class DatabaseResultConverter
     {
         $result = array();
         foreach($databaseResult as $record) {
-            $bazaarLoot = LootSheetFactory::createBazaarLoot($record['Name'], $record['Amount'], $record['SheetRow']);
+            $bazaarLoot = LootSheetFactory::createBazaarLoot($record['Name'], $record['Amount'], $record['LootSheetRow'], self::getBazaarSheetRowValue($record));
             $result[] = $bazaarLoot;
         }
         return $result;
+    }
+
+    /**
+     * Get the value of BazaarSheetValue, if not present return 0
+     * 
+     * @param string[] $record The database record
+     * @return string
+     */
+    private static function getBazaarSheetRowValue(array $record): string
+    {
+        if (!key_exists('BazaarSheetRow', $record)) {
+            return '0';
+        }
+        return $record['BazaarSheetRow'];
     }
 }

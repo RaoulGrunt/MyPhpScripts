@@ -14,7 +14,7 @@ use Framework\Databases as Databases;
  * @uses DatabaseReaderBase 1.0.0
  * @uses Databases\DataFactory 1.0.0
  * @uses DatabaseResultConverter 1.0.0
- * @version 1.0.1
+ * @version 1.1.0
  */
 class LootSheetDatabaseReader extends DatabaseReaderBase
 {
@@ -54,7 +54,7 @@ class LootSheetDatabaseReader extends DatabaseReaderBase
      */
     public function getBazaarLoot(string $bazaarName): array
     {
-        $select = array('Loot.Name', 'BazaarLoot.Amount', 'Loot.SheetRow');
+        $select = array('Loot.Name', 'BazaarLoot.Amount', 'Loot.SheetRow AS LootSheetRow', 'Bazaar.SheetRow AS BazaarSheetRow');
         return $this->runGetBazaarLoot($select, $bazaarName);
     }
 }

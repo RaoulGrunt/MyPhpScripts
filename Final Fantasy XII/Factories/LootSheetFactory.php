@@ -15,14 +15,14 @@ require_once SCRIPT_WRITERS . '/LootSheetSheetWriter.php';
  * 
  * @author Raoul de Grunt
  * @package Final Fantasy XII
- * @uses FactoryBase 1.0.0
+ * @uses FactoryBase 1.1.0
  * @uses LootSheetCoordinator 1.0.0
  * @uses LootSheetSheetReader 1.0.0
  * @uses LootSheetHandler 1.0.0
- * @uses LootSheetDatabaseReader 1.0.0
+ * @uses LootSheetDatabaseReader 1.1.0
  * @uses LootOutput 1.2.0
  * @uses LootSheetSheetWriter 1.0.0
- * @version 1.0.0
+ * @version 1.1.0
  */
 class LootSheetFactory extends FactoryBase
 {

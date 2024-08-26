@@ -15,14 +15,14 @@ require_once SCRIPT_WRITERS . '/BazaarSheetSheetWriter.php';
  * 
  * @author Raoul de Grunt
  * @package Final Fantasy XII
- * @uses FactoryBase 1.0.0
+ * @uses FactoryBase 1.1.0
  * @uses BazaarSheetCoordinator 1.0.0
  * @uses BazaarSheetSheetReader 1.0.0
  * @uses BazaarSheetHandler 1.0.0
- * @uses BazaarSheetDatabaseReader 1.0.0
+ * @uses BazaarSheetDatabaseReader 1.1.0
  * @uses BazaarOutput 1.0.0
  * @uses BazaarSheetSheetWriter 1.0.0
- * @version 1.0.0
+ * @version 1.1.0
  */
 class BazaarSheetFactory extends FactoryBase
 {

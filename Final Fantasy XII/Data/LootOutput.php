@@ -1,7 +1,8 @@
 <?php
 
 require_once SCRIPT_BASECLASSES . '/OutputBase.php';
-require_once SCRIPT_CONVERTERS . '/LootValueConverter.php';
+require_once SCRIPT_CONVERTERS . '/SellUpToValueConverter.php';
+require_once SCRIPT_CONVERTERS . '/NeededToTurnInValueConverter.php';
 
 /**
  * LootOutput
@@ -11,15 +12,13 @@ require_once SCRIPT_CONVERTERS . '/LootValueConverter.php';
  * @author Raoul de Grunt
  * @package Final Fantasy XII
  * @uses OutputBase 1.0.0
- * @uses LootValueConverter 1.0.0
- * @version 1.2.0
+ * @uses NeededToTurnInValueConverter 1.0.0
+ * @version 1.3.0
  */
 class LootOutput extends OutputBase
 {
     /** @var string $lootName */
     private string $lootName;
-    /** @var int $sellUpTo */
-    private int $sellUpTo;
     /** @var BazaarLoot[][] $bazaarLoot */
     private array $bazaarLoot;
 
@@ -46,7 +45,6 @@ class LootOutput extends OutputBase
         $result = array();
         foreach($bazaarLoot as $bazaarLootItem) {
             if ($bazaarLootItem->lootName() === $lootName) {
-                $this->sellUpTo += $bazaarLootItem->amount();
                 array_unshift($result, $bazaarLootItem);
             } else {
                 $result[] = $bazaarLootItem;
@@ -63,38 +61,9 @@ class LootOutput extends OutputBase
     public function getUpdateRow(): array
     {
         $result = array();
-        $result[] = LootValueConverter::convertToSellUpToString($this->getCurrentLootRow(), $this->sellUpTo);
+        $result[] = SellUpToValueConverter::convertToSellUpToString($this->bazaarLoot);
         foreach($this->bazaarLoot as $bazaarItemLoot) {
-            $result[] = LootValueConverter::convertToNeededToTurnInString($bazaarItemLoot);
-        }
-        return $result;
-    }
-
-    /**
-     * Get the sheet function for Sell up to cell
-     * 
-     * @return string
-     */
-    public function getSellUpToSheetText(): string
-    {
-        $result = '1';
-        $lootRow = $this->getCurrentLootRow();
-        if ($lootRow > 0) {
-                $result = '=IF(B' . $lootRow . ',1, ' . $this->sellUpTo . ')';
-        }
-        return $result;
-    }
-
-    /**
-     * Get the row of the current loot
-     * 
-     * @return int
-     */
-    private function getCurrentLootRow(): int
-    {
-        $result = '0';
-        if (!empty($this->bazaarLoot)) {
-            $result = $this->bazaarLoot[0][0]->sheetRow();
+            $result[] = NeededToTurnInValueConverter::convertToNeededToTurnInString($bazaarItemLoot);
         }
         return $result;
     }
@@ -107,7 +76,6 @@ class LootOutput extends OutputBase
     private function setClassProperties(string $lootName)
     {
         $this->lootName = $lootName;
-        $this->sellUpTo = 1;
         $this->bazaarLoot = array();
     }
 }

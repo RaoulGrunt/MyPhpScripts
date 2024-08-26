@@ -9,8 +9,8 @@ require_once SCRIPT_DATA . '/BazaarLoot.php';
  * 
  * @author Raoul de Grunt
  * @package Final Fantasy XII
- * @uses BazaarLoot 1.0.0
- * @version 1.0.0
+ * @uses BazaarLoot 1.1.0
+ * @version 1.1.0
  */
 abstract class FactoryBase
 {
@@ -19,11 +19,12 @@ abstract class FactoryBase
      * 
      * @param string $lootName Name of the loot
      * @param int $amount The amount needed
-     * @param int $sheetRow The rownumber where the loot is in the sheet
+     * @param int $lootSheetRow The rownumber where the loot is in the sheet
+     * @param int $bazaarSheetRow The row number where the bazaar item is in the sheet
      * @return BazaarLoot
      */
-    public static function createBazaarLoot(string $lootName, int $amount, int $sheetRow): BazaarLoot
+    public static function createBazaarLoot(string $lootName, int $amount, int $lootSheetRow, int $bazaarSheetRow): BazaarLoot
     {
-        return new BazaarLoot($lootName, $amount, $sheetRow);
+        return new BazaarLoot($lootName, $amount, $lootSheetRow, $bazaarSheetRow);
     }
 }

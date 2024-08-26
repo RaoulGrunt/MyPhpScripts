@@ -7,7 +7,7 @@
  * 
  * @author Raoul de Grunt
  * @package Final Fantasy XII
- * @version 1.0.1
+ * @version 1.1.0
  */
 class BazaarLoot
 {
@@ -15,8 +15,10 @@ class BazaarLoot
     private string $lootName;
     /** @var int $amount */
     private int $amount;
-    /** @var int $sheetRow */
-    private int $sheetRow;
+    /** @var int $lootSheetRow */
+    private int $lootSheetRow;
+    /** @var int $bazaarSheetRow */
+    private int $bazaarSheetRow;
 
     /**
      * Constructor
@@ -25,11 +27,12 @@ class BazaarLoot
      * 
      * @param string $lootName Name of the loot item
      * @param int $amount The amount needed to turn in
-     * @param int $sheetRow The row number where the loot is in the sheet
+     * @param int $lootSheetRow The row number where the loot is in the sheet
+     * @param int $bazaarSheetRow The row number where the bazaar item is in the sheet
      */
-    public function __construct(string $lootName, int $amount, int $sheetRow)
+    public function __construct(string $lootName, int $amount, int $lootSheetRow, int $bazaarSheetRow)
     {
-        $this->setClassProperties($lootName, $amount, $sheetRow);
+        $this->setClassProperties($lootName, $amount, $lootSheetRow, $bazaarSheetRow);
     }
 
     /**
@@ -57,9 +60,19 @@ class BazaarLoot
      * 
      * @return int
      */
-    public function sheetRow(): int
+    public function lootSheetRow(): int
     {
-        return $this->sheetRow;
+        return $this->lootSheetRow;
+    }
+
+    /**
+     * Get the bazaar row
+     * 
+     * @return int
+     */
+    public function bazaarSheetRow(): int
+    {
+        return $this->bazaarSheetRow;
     }
 
     /**
@@ -67,12 +80,14 @@ class BazaarLoot
      * 
      * @param string $lootName Name of the loot item
      * @param int $amount The amount needed to turn in
-     * @param int $sheetRow The rownumber where the loot is in the sheet
+     * @param int $lootSheetRow The rownumber where the loot is in the sheet
+     * @param int $bazaarSheetRow The row number where the bazaar item is in the sheet
      */
-    private function setClassProperties(string $lootName, int $amount, int $sheetRow)
+    private function setClassProperties(string $lootName, int $amount, int $lootSheetRow, int $bazaarSheetRow)
     {
         $this->lootName = $lootName;
         $this->amount = $amount;
-        $this->sheetRow = $sheetRow;
+        $this->lootSheetRow = $lootSheetRow;
+        $this->bazaarSheetRow = $bazaarSheetRow;
     }
 }
