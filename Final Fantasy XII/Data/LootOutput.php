@@ -12,8 +12,9 @@ require_once SCRIPT_CONVERTERS . '/NeededToTurnInValueConverter.php';
  * @author Raoul de Grunt
  * @package Final Fantasy XII
  * @uses OutputBase 1.0.0
+ * @uses SellUpToValueConverter 1.0.0
  * @uses NeededToTurnInValueConverter 1.0.0
- * @version 1.3.0
+ * @version 1.3.1
  */
 class LootOutput extends OutputBase
 {
