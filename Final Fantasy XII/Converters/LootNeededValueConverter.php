@@ -5,7 +5,7 @@
  * 
  * @author Raoul de Grunt
  * @package Final Fantasy XII
- * @version 1.0.0
+ * @version 1.0.1
  */
 class LootNeededValueConverter
 {
@@ -45,12 +45,14 @@ class LootNeededValueConverter
      */
     private static function convertToLootStringSingle(array $bazaarLoot): string
     {
-        $lootName = $bazaarLoot[0]->lootName();
-        $sheetRow = $bazaarLoot[0]->lootSheetRow();
+        $bazaarSheetRow = $bazaarLoot[0]->bazaarSheetRow();
+        $lootSheetRow = $bazaarLoot[0]->lootSheetRow();
+        $lootName = $bazaarLoot[0]->lootName();        
         $lootAmount = $bazaarLoot[0]->amount();
         return '=
-                IF(Loot!A' . $sheetRow . ', "", 
-                IF(Loot!A' . $sheetRow . ' = FALSE, "' . $lootName . ' x' . $lootAmount . '", ""))';
+                IF(AND(A' . $bazaarSheetRow . ', Loot!A' . $lootSheetRow . '), "", 
+                IF(Loot!A' . $lootSheetRow . ', "Sell: ' . $lootName . ' x' . $lootAmount . '", 
+                IF(Loot!A' . $lootSheetRow . ' = FALSE, "Collect: ' . $lootName . ' x' . $lootAmount . '", "")))';
     }
 
     /**
@@ -61,17 +63,19 @@ class LootNeededValueConverter
      */
     private static function convertToLootStringDouble(array $bazaarLoot): string
     {
-        $lootNameFirst = $bazaarLoot[0]->lootName();
+        $bazaarSheetRow = $bazaarLoot[0]->bazaarSheetRow();
         $sheetRowFirst = $bazaarLoot[0]->lootSheetRow();
+        $lootNameFirst = $bazaarLoot[0]->lootName();
         $lootAmountFirst = $bazaarLoot[0]->amount();
-        $lootNameSecond = $bazaarLoot[1]->lootName();
         $sheetRowSecond = $bazaarLoot[1]->lootSheetRow();
+        $lootNameSecond = $bazaarLoot[1]->lootName();
         $lootAmountSecond = $bazaarLoot[1]->amount();
         return '=
-                IF(AND(Loot!A' . $sheetRowFirst . ', Loot!A' . $sheetRowSecond . '), "", 
-                IF(AND(Loot!A' . $sheetRowFirst . ' = FALSE, Loot!A' . $sheetRowSecond . '), "' . $lootNameFirst . ' x' . $lootAmountFirst . '",
-                IF(AND(Loot!A' . $sheetRowFirst . ', Loot!A' . $sheetRowSecond . ' = FALSE), "' . $lootNameSecond . ' x' . $lootAmountSecond . '",
-                IF(AND(Loot!A' . $sheetRowFirst . ' = FALSE, Loot!A' . $sheetRowSecond . ' = FALSE), "' . $lootNameFirst . ' x' . $lootAmountFirst . ', ' . $lootNameSecond . ' x' . $lootAmountSecond . '"))))';
+                IF(AND(A' . $bazaarSheetRow . ', Loot!A' . $sheetRowFirst . ', Loot!A' . $sheetRowSecond . '), "",
+                IF(AND(Loot!A' . $sheetRowFirst . ', Loot!A' . $sheetRowSecond . '), "Sell: ' . $lootNameFirst . ' x' . $lootAmountFirst . ', ' . $lootNameSecond . ' x' . $lootAmountSecond . '", 
+                IF(AND(Loot!A' . $sheetRowFirst . ' = FALSE, Loot!A' . $sheetRowSecond . '), "Collect: ' . $lootNameFirst . ' x' . $lootAmountFirst . '",
+                IF(AND(Loot!A' . $sheetRowFirst . ', Loot!A' . $sheetRowSecond . ' = FALSE), "Collect: ' . $lootNameSecond . ' x' . $lootAmountSecond . '",
+                IF(AND(Loot!A' . $sheetRowFirst . ' = FALSE, Loot!A' . $sheetRowSecond . ' = FALSE), "Collect: ' . $lootNameFirst . ' x' . $lootAmountFirst . ', ' . $lootNameSecond . ' x' . $lootAmountSecond . '")))))';
     }
 
     /**
@@ -82,23 +86,25 @@ class LootNeededValueConverter
      */
     private static function convertToLootStringTriple(array $bazaarLoot): string
     {
-        $lootNameFirst = $bazaarLoot[0]->lootName();
+        $bazaarSheetRow = $bazaarLoot[0]->bazaarSheetRow();
         $sheetRowFirst = $bazaarLoot[0]->lootSheetRow();
+        $lootNameFirst = $bazaarLoot[0]->lootName();
         $lootAmountFirst = $bazaarLoot[0]->amount();
-        $lootNameSecond = $bazaarLoot[1]->lootName();
         $sheetRowSecond = $bazaarLoot[1]->lootSheetRow();
+        $lootNameSecond = $bazaarLoot[1]->lootName();
         $lootAmountSecond = $bazaarLoot[1]->amount();
-        $lootNameThird = $bazaarLoot[2]->lootName();
         $sheetRowThird = $bazaarLoot[2]->lootSheetRow();
+        $lootNameThird = $bazaarLoot[2]->lootName();
         $lootAmountThird = $bazaarLoot[2]->amount();
         return '=
-                IF(AND(Loot!A' . $sheetRowFirst . ', Loot!A' . $sheetRowSecond . ', Loot!A' . $sheetRowThird . '),"",
-                IF(AND(Loot!A' . $sheetRowFirst . ', Loot!A' . $sheetRowSecond . ', Loot!A' . $sheetRowThird . ' = FALSE), "' . $lootNameThird . ' x' . $lootAmountThird . '",
-                IF(AND(Loot!A' . $sheetRowFirst . ', Loot!A' . $sheetRowSecond . ' = FALSE, Loot!A' . $sheetRowThird . '), "' . $lootNameSecond . ' x' . $lootAmountSecond . '",
-                IF(AND(Loot!A' . $sheetRowFirst . ', Loot!A' . $sheetRowSecond . ' = FALSE, Loot!A' . $sheetRowThird . ' = FALSE), "' . $lootNameSecond . ' x' . $lootAmountSecond . ', ' . $lootNameThird . ' x' . $lootAmountThird . '",
-                IF(AND(Loot!A' . $sheetRowFirst . ' = FALSE, Loot!A' . $sheetRowSecond . ', Loot!A' . $sheetRowThird . '), "' . $lootNameFirst . ' x' . $lootAmountFirst . '",
-                IF(AND(Loot!A' . $sheetRowFirst . ' = FALSE, Loot!A' . $sheetRowSecond . ', Loot!A' . $sheetRowThird . ' = FALSE), "' . $lootNameFirst . ' x' . $lootAmountFirst . ', ' . $lootNameThird . ' x' . $lootAmountThird . '",
-                IF(AND(Loot!A' . $sheetRowFirst . ' = FALSE, Loot!A' . $sheetRowSecond . ' = FALSE, Loot!A' . $sheetRowThird . '), "' . $lootNameFirst . ' x' . $lootAmountFirst . ', ' . $lootNameSecond . ' x' . $lootAmountSecond . '",
-                IF(AND(Loot!A' . $sheetRowFirst . ' = FALSE, Loot!A' . $sheetRowSecond . ' = FALSE, Loot!A' . $sheetRowThird . '=FALSE), "' . $lootNameFirst . ' x' . $lootAmountFirst . ', ' . $lootNameSecond . ' x' . $lootAmountSecond . ', ' . $lootNameThird . ' x' . $lootAmountThird . '"))))))))';
+                IF(AND(A' . $bazaarSheetRow . ', Loot!A' . $sheetRowFirst . ', Loot!A' . $sheetRowSecond . ', Loot!A' . $sheetRowThird . '),"",
+                IF(AND(Loot!A' . $sheetRowFirst . ', Loot!A' . $sheetRowSecond . ', Loot!A' . $sheetRowThird . '),"Sell: ' . $lootNameFirst . ' x' . $lootAmountFirst . ', ' . $lootNameSecond . ' x' . $lootAmountSecond . ', ' . $lootNameThird . ' x' . $lootAmountThird . '",
+                IF(AND(Loot!A' . $sheetRowFirst . ', Loot!A' . $sheetRowSecond . ', Loot!A' . $sheetRowThird . ' = FALSE), "Collect: ' . $lootNameThird . ' x' . $lootAmountThird . '",
+                IF(AND(Loot!A' . $sheetRowFirst . ', Loot!A' . $sheetRowSecond . ' = FALSE, Loot!A' . $sheetRowThird . '), "Collect: ' . $lootNameSecond . ' x' . $lootAmountSecond . '",
+                IF(AND(Loot!A' . $sheetRowFirst . ', Loot!A' . $sheetRowSecond . ' = FALSE, Loot!A' . $sheetRowThird . ' = FALSE), "Collect: ' . $lootNameSecond . ' x' . $lootAmountSecond . ', ' . $lootNameThird . ' x' . $lootAmountThird . '",
+                IF(AND(Loot!A' . $sheetRowFirst . ' = FALSE, Loot!A' . $sheetRowSecond . ', Loot!A' . $sheetRowThird . '), "Collect: ' . $lootNameFirst . ' x' . $lootAmountFirst . '",
+                IF(AND(Loot!A' . $sheetRowFirst . ' = FALSE, Loot!A' . $sheetRowSecond . ', Loot!A' . $sheetRowThird . ' = FALSE), "Collect: ' . $lootNameFirst . ' x' . $lootAmountFirst . ', ' . $lootNameThird . ' x' . $lootAmountThird . '",
+                IF(AND(Loot!A' . $sheetRowFirst . ' = FALSE, Loot!A' . $sheetRowSecond . ' = FALSE, Loot!A' . $sheetRowThird . '), "Collect: ' . $lootNameFirst . ' x' . $lootAmountFirst . ', ' . $lootNameSecond . ' x' . $lootAmountSecond . '",
+                IF(AND(Loot!A' . $sheetRowFirst . ' = FALSE, Loot!A' . $sheetRowSecond . ' = FALSE, Loot!A' . $sheetRowThird . ' = FALSE), "Collect: ' . $lootNameFirst . ' x' . $lootAmountFirst . ', ' . $lootNameSecond . ' x' . $lootAmountSecond . ', ' . $lootNameThird . ' x' . $lootAmountThird . '")))))))))';
     }
 }

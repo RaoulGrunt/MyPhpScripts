@@ -12,8 +12,8 @@ require_once SCRIPT_FACTORIES . '/BazaarSheetFactory.php';
  * @author Raoul de Grunt
  * @package Final Fantasy XII
  * @uses HandlerBase 1.0.0
- * @uses BazaarSheetFactory 1.1.0
- * @version 1.0.1
+ * @uses BazaarSheetFactory 1.2.0
+ * @version 1.0.2
  */
 class BazaarSheetHandler extends HandlerBase
 {

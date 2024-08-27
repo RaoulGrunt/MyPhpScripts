@@ -10,7 +10,7 @@ require_once SCRIPT_BASECLASSES . '/DatabaseReaderBase.php';
  * @author Raoul de Grunt
  * @package Final Fantasy XII
  * @uses DatabaseReaderBase 1.0.0
- * @version 1.1.0
+ * @version 1.2.0
  */
 class BazaarSheetDatabaseReader extends DatabaseReaderBase
 {
@@ -32,7 +32,7 @@ class BazaarSheetDatabaseReader extends DatabaseReaderBase
      */
     public function getBazaarLoot(string $bazaarName): array
     {
-        $select = array('Loot.Name', 'BazaarLoot.Amount', 'Loot.SheetRow AS LootSheetRow');
+        $select = array('Loot.Name', 'BazaarLoot.Amount', 'Loot.SheetRow AS LootSheetRow', 'Bazaar.SheetRow AS BazaarSheetRow');
         return $this->runGetBazaarLoot($select, $bazaarName);
     }
 }
