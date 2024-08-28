@@ -2,6 +2,7 @@
 
 require_once SCRIPT_BASECLASSES . '/OutputBase.php';
 require_once SCRIPT_CONVERTERS . '/LootNeededValueConverter.php';
+require_once SCRIPT_CONVERTERS . '/SellCheckboxValueConverter.php';
 
 /**
  * BazaarOutput
@@ -11,8 +12,9 @@ require_once SCRIPT_CONVERTERS . '/LootNeededValueConverter.php';
  * @author Raoul de Grunt
  * @package Final Fantasy XII
  * @uses OutputBase 1.0.0
+ * @uses SellCheckboxValueConverter 1.0.0
  * @uses LootNeededValueConverter 1.0.0
- * @version 1.0.2
+ * @version 1.0.3
  */
 class BazaarOutput extends OutputBase
 {
@@ -40,6 +42,7 @@ class BazaarOutput extends OutputBase
     {
         $result = array();
         $result[] = LootNeededValueConverter::convertToLootString($this->bazaarLoot);
+        $result[] = SellCheckboxValueConverter::convertToSellCheckboxString($this->bazaarLoot);
         return $result;
     }
 
