@@ -11,10 +11,10 @@ use Framework\Databases as Databases;
  * 
  * @author Raoul de Grunt
  * @package Final Fantasy XII
- * @uses DatabaseReaderBase 1.0.0
+ * @uses DatabaseReaderBase 1.1.0
  * @uses Databases\DataFactory 1.0.0
  * @uses DatabaseResultConverter 1.0.0
- * @version 1.1.0
+ * @version 1.2.0
  */
 class LootSheetDatabaseReader extends DatabaseReaderBase
 {
@@ -54,7 +54,7 @@ class LootSheetDatabaseReader extends DatabaseReaderBase
      */
     public function getBazaarLoot(string $bazaarName): array
     {
-        $select = array('Loot.Name', 'BazaarLoot.Amount', 'Loot.SheetRow AS LootSheetRow', 'Bazaar.SheetRow AS BazaarSheetRow');
+        $select = array('Loot.Name', 'BazaarLoot.Amount', 'BazaarLoot.Multiply AS Multiply', 'Loot.SheetRow AS LootSheetRow', 'Bazaar.SheetRow AS BazaarSheetRow');
         return $this->runGetBazaarLoot($select, $bazaarName);
     }
 }

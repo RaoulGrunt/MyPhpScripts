@@ -9,8 +9,8 @@ require_once SCRIPT_FACTORIES . '/LootSheetFactory.php';
  * 
  * @author Raoul de Grunt
  * @package Final Fantasy XII
- * @uses LootSheetFactory 1.0.0
- * @version 1.0.0
+ * @uses LootSheetFactory 1.2.0
+ * @version 1.0.1
  */
 class LootSheetCoordinator
 {

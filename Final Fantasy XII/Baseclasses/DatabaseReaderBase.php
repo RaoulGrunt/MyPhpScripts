@@ -14,9 +14,9 @@ use Framework\Databases as Databases;
  * @author Raoul de Grunt
  * @package Final Fantasy XII
  * @uses Databases\DataFactory 1.0.0
- * @uses DatabaseResultConverter 1.0.0
+ * @uses DatabaseResultConverter 1.1.0
  * @uses Framework\Databases\WrapperFactory 1.0.0
- * @version 1.0.1
+ * @version 1.1.0
  */
 abstract class DatabaseReaderBase
 {

@@ -7,7 +7,7 @@
  * 
  * @author Raoul de Grunt
  * @package Final Fantasy XII
- * @version 1.1.0
+ * @version 1.2.0
  */
 class BazaarLoot
 {
@@ -15,6 +15,8 @@ class BazaarLoot
     private string $lootName;
     /** @var int $amount */
     private int $amount;
+    /** @var int $multiply */
+    private int $multiply;
     /** @var int $lootSheetRow */
     private int $lootSheetRow;
     /** @var int $bazaarSheetRow */
@@ -27,12 +29,13 @@ class BazaarLoot
      * 
      * @param string $lootName Name of the loot item
      * @param int $amount The amount needed to turn in
+     * @param int $multiply The times the bazaar items for this loot needs to be unlocked
      * @param int $lootSheetRow The row number where the loot is in the sheet
      * @param int $bazaarSheetRow The row number where the bazaar item is in the sheet
      */
-    public function __construct(string $lootName, int $amount, int $lootSheetRow, int $bazaarSheetRow)
+    public function __construct(string $lootName, int $amount, int $multiply, int $lootSheetRow, int $bazaarSheetRow)
     {
-        $this->setClassProperties($lootName, $amount, $lootSheetRow, $bazaarSheetRow);
+        $this->setClassProperties($lootName, $amount, $multiply, $lootSheetRow, $bazaarSheetRow);
     }
 
     /**
@@ -53,6 +56,16 @@ class BazaarLoot
     public function amount(): int
     {
         return $this->amount;
+    }
+
+    /**
+     * Get the multiply
+     * 
+     * @return int
+     */
+    public function multiply(): int
+    {
+        return $this->multiply;
     }
 
     /**
@@ -80,13 +93,15 @@ class BazaarLoot
      * 
      * @param string $lootName Name of the loot item
      * @param int $amount The amount needed to turn in
+     * @param int $multiply The times the bazaar items for this loot needs to be unlocked
      * @param int $lootSheetRow The rownumber where the loot is in the sheet
      * @param int $bazaarSheetRow The row number where the bazaar item is in the sheet
      */
-    private function setClassProperties(string $lootName, int $amount, int $lootSheetRow, int $bazaarSheetRow)
+    private function setClassProperties(string $lootName, int $amount, int $multiply, int $lootSheetRow, int $bazaarSheetRow)
     {
         $this->lootName = $lootName;
         $this->amount = $amount;
+        $this->multiply = $multiply;
         $this->lootSheetRow = $lootSheetRow;
         $this->bazaarSheetRow = $bazaarSheetRow;
     }

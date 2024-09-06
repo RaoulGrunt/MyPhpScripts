@@ -5,7 +5,7 @@
  * 
  * @author Raoul de Grunt
  * @package Final Fantasy XII
- * @version 1.0.0
+ * @version 1.0.1
  */
 class SellUpToValueConverter
 {
@@ -53,9 +53,10 @@ class SellUpToValueConverter
     {
         $sheetRow = $bazaarLoot[0][0]->bazaarSheetRow();
         $lootAmount = $bazaarLoot[0][0]->amount();
+        $lootMultiply = $bazaarLoot[0][0]->multiply();
         return '=
                 IF(Bazaar!A' . $sheetRow . ', "1", 
-                IF(Bazaar!A' . $sheetRow . ' = FALSE, "' . 1 + $lootAmount . '", ""))';
+                IF(Bazaar!A' . $sheetRow . ' = FALSE, "' . 1 + $lootAmount * $lootMultiply . '", ""))';
     }
 
     /**
@@ -68,13 +69,15 @@ class SellUpToValueConverter
     {
         $sheetRowFirst = $bazaarLoot[0][0]->bazaarSheetRow();
         $lootAmountFirst = $bazaarLoot[0][0]->amount();
+        $lootMultiplyFirst = $bazaarLoot[0][0]->multiply();
         $sheetRowSecond = $bazaarLoot[1][0]->bazaarSheetRow();
         $lootAmountSecond = $bazaarLoot[1][0]->amount();
+        $lootMultiplySecond = $bazaarLoot[1][0]->multiply();
         return '=
                 IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . '), "1", 
-                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ' = FALSE), "' . 1 + $lootAmountSecond . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . '), "' . 1 + $lootAmountFirst . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ' = FALSE), "' . 1 + $lootAmountFirst + $lootAmountSecond . '"))))';
+                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ' = FALSE), "' . 1 + $lootAmountSecond * $lootMultiplySecond . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . '), "' . 1 + $lootAmountFirst * $lootMultiplyFirst . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ' = FALSE), "' . 1 + $lootAmountFirst * $lootMultiplyFirst + $lootAmountSecond * $lootMultiplySecond . '"))))';
     }
 
     /**
@@ -86,20 +89,23 @@ class SellUpToValueConverter
     private static function convertToSellUpToStringTriple(array $bazaarLoot): string
     {
         $sheetRowFirst = $bazaarLoot[0][0]->bazaarSheetRow();
-        $lootAmountFirst = $bazaarLoot[0][0]->amount();;
+        $lootAmountFirst = $bazaarLoot[0][0]->amount();
+        $lootMultiplyFirst = $bazaarLoot[0][0]->multiply();
         $sheetRowSecond = $bazaarLoot[1][0]->bazaarSheetRow();
         $lootAmountSecond = $bazaarLoot[1][0]->amount();
+        $lootMultiplySecond = $bazaarLoot[1][0]->multiply();
         $sheetRowThird = $bazaarLoot[2][0]->bazaarSheetRow();
         $lootAmountThird = $bazaarLoot[2][0]->amount();
+        $lootMultiplyThird = $bazaarLoot[2][0]->multiply();
         return '=
                 IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . '), "1",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ' = FALSE), "' . 1 + $lootAmountThird . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . '), "' . 1 + $lootAmountSecond . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ' = FALSE), "' . 1 + $lootAmountSecond + $lootAmountThird . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . '), "' . 1 + $lootAmountFirst . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ' = FALSE), "' . 1 + $lootAmountFirst + $lootAmountThird . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . '), "' . 1 + $lootAmountFirst + $lootAmountSecond . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . '= FALSE), "' . 1 + $lootAmountFirst + $lootAmountSecond + $lootAmountThird . '"))))))))';
+                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ' = FALSE), "' . 1 + $lootAmountThird * $lootMultiplyThird . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . '), "' . 1 + $lootAmountSecond * $lootMultiplySecond . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ' = FALSE), "' . 1 + $lootAmountSecond * $lootMultiplySecond + $lootAmountThird * $lootMultiplyThird . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . '), "' . 1 + $lootAmountFirst * $lootMultiplyFirst . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ' = FALSE), "' . 1 + $lootAmountFirst * $lootMultiplyFirst + $lootAmountThird * $lootMultiplyThird . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . '), "' . 1 + $lootAmountFirst * $lootMultiplyFirst + $lootAmountSecond * $lootMultiplySecond . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . '= FALSE), "' . 1 + $lootAmountFirst * $lootMultiplyFirst + $lootAmountSecond * $lootMultiplySecond + $lootAmountThird * $lootMultiplyThird . '"))))))))';
     }
 
     /**
@@ -111,30 +117,34 @@ class SellUpToValueConverter
     private static function convertToSellUpToStringQuadruple(array $bazaarLoot): string
     {
         $sheetRowFirst = $bazaarLoot[0][0]->bazaarSheetRow();
-        $lootAmountFirst = $bazaarLoot[0][0]->amount();;
+        $lootAmountFirst = $bazaarLoot[0][0]->amount();
+        $lootMultiplyFirst = $bazaarLoot[0][0]->multiply();
         $sheetRowSecond = $bazaarLoot[1][0]->bazaarSheetRow();
         $lootAmountSecond = $bazaarLoot[1][0]->amount();
+        $lootMultiplySecond = $bazaarLoot[1][0]->multiply();
         $sheetRowThird = $bazaarLoot[2][0]->bazaarSheetRow();
         $lootAmountThird = $bazaarLoot[2][0]->amount();
+        $lootMultiplyThird = $bazaarLoot[2][0]->multiply();
         $sheetRowFourth = $bazaarLoot[3][0]->bazaarSheetRow();
         $lootAmountFourth = $bazaarLoot[3][0]->amount();
+        $lootMultiplyFourth = $bazaarLoot[3][0]->multiply();
         return '=
                 IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . '), "1",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ' = FALSE), "' . 1 + $lootAmountFourth . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . '), "' . 1 + $lootAmountThird . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . '), "' . 1 + $lootAmountSecond . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ' = FALSE), "' . 1 + $lootAmountThird + $lootAmountFourth . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ' = FALSE), "' . 1 + $lootAmountSecond + $lootAmountFourth . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . '), "' . 1 + $lootAmountSecond + $lootAmountThird . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ' = FALSE), "' . 1 + $lootAmountSecond + $lootAmountThird + $lootAmountFourth . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . '), "' . 1 + $lootAmountFirst . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ' = FALSE), "' . 1 + $lootAmountFirst + $lootAmountFourth . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . '), "' . 1 + $lootAmountFirst + $lootAmountThird . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . '), "' . 1 + $lootAmountFirst + $lootAmountSecond . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ' = FALSE), "' . 1 + $lootAmountFirst + $lootAmountThird + $lootAmountFourth . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ' = FALSE), "' . 1 + $lootAmountFirst + $lootAmountSecond + $lootAmountFourth . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . '), "' . 1 + $lootAmountFirst + $lootAmountSecond + $lootAmountThird . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ' = FALSE), "' . 1 + $lootAmountFirst + $lootAmountSecond + $lootAmountThird + $lootAmountFourth . '"))))))))))))))))';
+                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ' = FALSE), "' . 1 + $lootAmountFourth * $lootMultiplyFourth . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . '), "' . 1 + $lootAmountThird * $lootMultiplyThird . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . '), "' . 1 + $lootAmountSecond * $lootMultiplySecond . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ' = FALSE), "' . 1 + $lootAmountThird * $lootMultiplyThird + $lootAmountFourth * $lootMultiplyFourth . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ' = FALSE), "' . 1 + $lootAmountSecond * $lootMultiplySecond + $lootAmountFourth * $lootMultiplyFourth . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . '), "' . 1 + $lootAmountSecond * $lootMultiplySecond + $lootAmountThird * $lootMultiplyThird . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ' = FALSE), "' . 1 + $lootAmountSecond * $lootMultiplySecond + $lootAmountThird * $lootMultiplyThird + $lootAmountFourth * $lootMultiplyFourth . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . '), "' . 1 + $lootAmountFirst * $lootMultiplyFirst . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ' = FALSE), "' . 1 + $lootAmountFirst * $lootMultiplyFirst + $lootAmountFourth * $lootMultiplyFourth . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . '), "' . 1 + $lootAmountFirst * $lootMultiplyFirst + $lootAmountThird * $lootMultiplyThird . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . '), "' . 1 + $lootAmountFirst * $lootMultiplyFirst + $lootAmountSecond * $lootMultiplySecond . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ' = FALSE), "' . 1 + $lootAmountFirst * $lootMultiplyFirst + $lootAmountThird * $lootMultiplyThird + $lootAmountFourth * $lootMultiplyFourth . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ' = FALSE), "' . 1 + $lootAmountFirst * $lootMultiplyFirst + $lootAmountSecond * $lootMultiplySecond + $lootAmountFourth * $lootMultiplyFourth . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . '), "' . 1 + $lootAmountFirst * $lootMultiplyFirst + $lootAmountSecond * $lootMultiplySecond + $lootAmountThird * $lootMultiplyThird . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ' = FALSE), "' . 1 + $lootAmountFirst * $lootMultiplyFirst + $lootAmountSecond * $lootMultiplySecond + $lootAmountThird * $lootMultiplyThird + $lootAmountFourth * $lootMultiplyFourth . '"))))))))))))))))';
     }
 
     /**
@@ -146,47 +156,52 @@ class SellUpToValueConverter
     private static function convertToSellUpToStringQuintuple(array $bazaarLoot): string
     {
         $sheetRowFirst = $bazaarLoot[0][0]->bazaarSheetRow();
-        $lootAmountFirst = $bazaarLoot[0][0]->amount();;
+        $lootAmountFirst = $bazaarLoot[0][0]->amount();
+        $lootMultiplyFirst = $bazaarLoot[0][0]->multiply();
         $sheetRowSecond = $bazaarLoot[1][0]->bazaarSheetRow();
         $lootAmountSecond = $bazaarLoot[1][0]->amount();
+        $lootMultiplySecond = $bazaarLoot[1][0]->multiply();
         $sheetRowThird = $bazaarLoot[2][0]->bazaarSheetRow();
         $lootAmountThird = $bazaarLoot[2][0]->amount();
+        $lootMultiplyThird = $bazaarLoot[2][0]->multiply();
         $sheetRowFourth = $bazaarLoot[3][0]->bazaarSheetRow();
         $lootAmountFourth = $bazaarLoot[3][0]->amount();
+        $lootMultiplyFourth = $bazaarLoot[3][0]->multiply();
         $sheetRowFifth = $bazaarLoot[4][0]->bazaarSheetRow();
         $lootAmountFifth = $bazaarLoot[4][0]->amount();
+        $lootMultiplyFifth = $bazaarLoot[3][0]->multiply();
         return '=
                 IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ', Bazaar!A' . $sheetRowFifth . '), "1",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ', Bazaar!A' . $sheetRowFifth . ' = FALSE), "' . 1 + $lootAmountFifth . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ' = FALSE, Bazaar!A' . $sheetRowFifth . '), "' . 1 + $lootAmountFourth . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ', Bazaar!A' . $sheetRowFifth . '), "' . 1 + $lootAmountThird . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ', Bazaar!A' . $sheetRowFifth . '), "' . 1 + $lootAmountSecond . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ' = FALSE, Bazaar!A' . $sheetRowFifth . ' = FALSE), "' . 1 + $lootAmountFourth + $lootAmountFifth . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ', Bazaar!A' . $sheetRowFifth . ' = FALSE), "' . 1 + $lootAmountThird + $lootAmountFifth . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ', Bazaar!A' . $sheetRowFifth . ' = FALSE), "' . 1 + $lootAmountSecond + $lootAmountFifth . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ' = FALSE, Bazaar!A' . $sheetRowFifth . '), "' . 1 + $lootAmountThird + $lootAmountFourth . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ' = FALSE, Bazaar!A' . $sheetRowFifth . '), "' . 1 + $lootAmountSecond + $lootAmountFourth . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ', Bazaar!A' . $sheetRowFifth . '), "' . 1 + $lootAmountSecond + $lootAmountThird . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ' = FALSE, Bazaar!A' . $sheetRowFifth . ' = FALSE), "' . 1 + $lootAmountThird + $lootAmountFourth + $lootAmountFifth . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ' = FALSE, Bazaar!A' . $sheetRowFifth . ' = FALSE), "' . 1 + $lootAmountSecond + $lootAmountFourth + $lootAmountFifth . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ', Bazaar!A' . $sheetRowFifth . ' = FALSE), "' . 1 + $lootAmountSecond + $lootAmountThird + $lootAmountFifth . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ' = FALSE, Bazaar!A' . $sheetRowFifth . '), "' . 1 + $lootAmountSecond + $lootAmountThird + $lootAmountFourth . '",                
-                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ' = FALSE, Bazaar!A' . $sheetRowFifth . ' = FALSE), "' . 1 + $lootAmountSecond + $lootAmountThird + $lootAmountFourth + $lootAmountFifth . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ', Bazaar!A' . $sheetRowFifth . '), "' . 1 + $lootAmountFirst . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ', Bazaar!A' . $sheetRowFifth . ' = FALSE), "' . 1 + $lootAmountFirst + $lootAmountFifth . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ' = FALSE, Bazaar!A' . $sheetRowFifth . '), "' . 1 + $lootAmountFirst + $lootAmountFourth . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ', Bazaar!A' . $sheetRowFifth . '), "' . 1 + $lootAmountFirst+ $lootAmountThird . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ', Bazaar!A' . $sheetRowFifth . '), "' . 1 + $lootAmountFirst+ $lootAmountSecond . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ' = FALSE, Bazaar!A' . $sheetRowFifth . ' = FALSE), "' . 1 + $lootAmountFirst + $lootAmountFourth + $lootAmountFifth . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ', Bazaar!A' . $sheetRowFifth . ' = FALSE), "' . 1 + $lootAmountFirst + $lootAmountThird + $lootAmountFifth . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ', Bazaar!A' . $sheetRowFifth . ' = FALSE), "' . 1 + $lootAmountFirst + $lootAmountSecond + $lootAmountFifth . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ' = FALSE, Bazaar!A' . $sheetRowFifth . '), "' . 1 + $lootAmountFirst + $lootAmountThird + $lootAmountFourth . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ' = FALSE, Bazaar!A' . $sheetRowFifth . '), "' . 1 + $lootAmountFirst + $lootAmountSecond + $lootAmountFourth . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ', Bazaar!A' . $sheetRowFifth . '), "' . 1 + $lootAmountFirst + $lootAmountSecond + $lootAmountThird . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ' = FALSE, Bazaar!A' . $sheetRowFifth . ' = FALSE), "' . 1 + $lootAmountFirst + $lootAmountThird + $lootAmountFourth + $lootAmountFifth . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ' = FALSE, Bazaar!A' . $sheetRowFifth . ' = FALSE), "' . 1 + $lootAmountFirst + $lootAmountSecond + $lootAmountFourth + $lootAmountFifth . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ', Bazaar!A' . $sheetRowFifth . ' = FALSE), "' . 1 + $lootAmountFirst + $lootAmountSecond + $lootAmountThird + $lootAmountFifth . '",
-                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ' = FALSE, Bazaar!A' . $sheetRowFifth . '), "' . 1 + $lootAmountFirst + $lootAmountSecond + $lootAmountThird + $lootAmountFourth . '",                
-                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ' = FALSE, Bazaar!A' . $sheetRowFifth . ' = FALSE), "' . 1 + $lootAmountFirst + $lootAmountSecond + $lootAmountThird + $lootAmountFourth + $lootAmountFifth . '"))))))))))))))))))))))))))))))))';
+                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ', Bazaar!A' . $sheetRowFifth . ' = FALSE), "' . 1 + $lootAmountFifth * $lootMultiplyFifth . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ' = FALSE, Bazaar!A' . $sheetRowFifth . '), "' . 1 + $lootAmountFourth * $lootMultiplyFourth . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ', Bazaar!A' . $sheetRowFifth . '), "' . 1 + $lootAmountThird * $lootMultiplyThird . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ', Bazaar!A' . $sheetRowFifth . '), "' . 1 + $lootAmountSecond * $lootMultiplySecond . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ' = FALSE, Bazaar!A' . $sheetRowFifth . ' = FALSE), "' . 1 + $lootAmountFourth * $lootMultiplyFourth + $lootAmountFifth * $lootMultiplyFifth . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ', Bazaar!A' . $sheetRowFifth . ' = FALSE), "' . 1 + $lootAmountThird * $lootMultiplyThird + $lootAmountFifth * $lootMultiplyFifth . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ', Bazaar!A' . $sheetRowFifth . ' = FALSE), "' . 1 + $lootAmountSecond * $lootMultiplySecond + $lootAmountFifth * $lootMultiplyFifth . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ' = FALSE, Bazaar!A' . $sheetRowFifth . '), "' . 1 + $lootAmountThird * $lootMultiplyThird + $lootAmountFourth * $lootMultiplyFourth . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ' = FALSE, Bazaar!A' . $sheetRowFifth . '), "' . 1 + $lootAmountSecond * $lootMultiplySecond + $lootAmountFourth * $lootMultiplyFourth . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ', Bazaar!A' . $sheetRowFifth . '), "' . 1 + $lootAmountSecond * $lootMultiplySecond + $lootAmountThird * $lootMultiplyThird . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ' = FALSE, Bazaar!A' . $sheetRowFifth . ' = FALSE), "' . 1 + $lootAmountThird * $lootMultiplyThird + $lootAmountFourth * $lootMultiplyFourth + $lootAmountFifth * $lootMultiplyFifth . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ' = FALSE, Bazaar!A' . $sheetRowFifth . ' = FALSE), "' . 1 + $lootAmountSecond * $lootMultiplySecond + $lootAmountFourth * $lootMultiplyFourth + $lootAmountFifth * $lootMultiplyFifth . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ', Bazaar!A' . $sheetRowFifth . ' = FALSE), "' . 1 + $lootAmountSecond * $lootMultiplySecond + $lootAmountThird * $lootMultiplyThird + $lootAmountFifth * $lootMultiplyFifth. '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ' = FALSE, Bazaar!A' . $sheetRowFifth . '), "' . 1 + $lootAmountSecond * $lootMultiplySecond + $lootAmountThird * $lootMultiplyThird + $lootAmountFourth * $lootMultiplyFourth . '",                
+                IF(AND(Bazaar!A' . $sheetRowFirst . ', Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ' = FALSE, Bazaar!A' . $sheetRowFifth . ' = FALSE), "' . 1 + $lootAmountSecond * $lootMultiplySecond + $lootAmountThird * $lootMultiplyThird + $lootAmountFourth * $lootMultiplyFourth + $lootAmountFifth * $lootMultiplyFifth . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ', Bazaar!A' . $sheetRowFifth . '), "' . 1 + $lootAmountFirst * $lootMultiplyFirst . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ', Bazaar!A' . $sheetRowFifth . ' = FALSE), "' . 1 + $lootAmountFirst * $lootMultiplyFirst + $lootAmountFifth * $lootMultiplyFifth . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ' = FALSE, Bazaar!A' . $sheetRowFifth . '), "' . 1 + $lootAmountFirst * $lootMultiplyFirst + $lootAmountFourth * $lootMultiplyFourth . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ', Bazaar!A' . $sheetRowFifth . '), "' . 1 + $lootAmountFirst * $lootMultiplyFirst+ $lootAmountThird * $lootMultiplyThird . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ', Bazaar!A' . $sheetRowFifth . '), "' . 1 + $lootAmountFirst * $lootMultiplyFirst + $lootAmountSecond * $lootMultiplySecond . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ' = FALSE, Bazaar!A' . $sheetRowFifth . ' = FALSE), "' . 1 + $lootAmountFirst * $lootMultiplyFirst + $lootAmountFourth * $lootMultiplyFourth + $lootAmountFifth * $lootMultiplyFifth . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ', Bazaar!A' . $sheetRowFifth . ' = FALSE), "' . 1 + $lootAmountFirst * $lootMultiplyFirst + $lootAmountThird * $lootMultiplyThird + $lootAmountFifth * $lootMultiplyFifth . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ', Bazaar!A' . $sheetRowFifth . ' = FALSE), "' . 1 + $lootAmountFirst * $lootMultiplyFirst + $lootAmountSecond * $lootMultiplySecond + $lootAmountFifth * $lootMultiplyFifth . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ' = FALSE, Bazaar!A' . $sheetRowFifth . '), "' . 1 + $lootAmountFirst * $lootMultiplyFirst + $lootAmountThird * $lootMultiplyThird + $lootAmountFourth * $lootMultiplyFourth . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ' = FALSE, Bazaar!A' . $sheetRowFifth . '), "' . 1 + $lootAmountFirst * $lootMultiplyFirst + $lootAmountSecond * $lootMultiplySecond + $lootAmountFourth * $lootMultiplyFourth . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ', Bazaar!A' . $sheetRowFifth . '), "' . 1 + $lootAmountFirst * $lootMultiplyFirst + $lootAmountSecond * $lootMultiplySecond + $lootAmountThird * $lootMultiplyThird . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ', Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ' = FALSE, Bazaar!A' . $sheetRowFifth . ' = FALSE), "' . 1 + $lootAmountFirst * $lootMultiplyFirst + $lootAmountThird * $lootMultiplyThird + $lootAmountFourth * $lootMultiplyFourth + $lootAmountFifth * $lootMultiplyFifth . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ', Bazaar!A' . $sheetRowFourth . ' = FALSE, Bazaar!A' . $sheetRowFifth . ' = FALSE), "' . 1 + $lootAmountFirst * $lootMultiplyFirst + $lootAmountSecond * $lootMultiplySecond + $lootAmountFourth * $lootMultiplyFourth + $lootAmountFifth * $lootMultiplyFifth . '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ', Bazaar!A' . $sheetRowFifth . ' = FALSE), "' . 1 + $lootAmountFirst * $lootMultiplyFirst + $lootAmountSecond * $lootMultiplySecond + $lootAmountThird * $lootMultiplyThird + $lootAmountFifth * $lootMultiplyFifth. '",
+                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ' = FALSE, Bazaar!A' . $sheetRowFifth . '), "' . 1 + $lootAmountFirst * $lootMultiplyFirst + $lootAmountSecond * $lootMultiplySecond + $lootAmountThird * $lootMultiplyThird + $lootAmountFourth * $lootMultiplyFourth . '",                
+                IF(AND(Bazaar!A' . $sheetRowFirst . ' = FALSE, Bazaar!A' . $sheetRowSecond . ' = FALSE, Bazaar!A' . $sheetRowThird . ' = FALSE, Bazaar!A' . $sheetRowFourth . ' = FALSE, Bazaar!A' . $sheetRowFifth . ' = FALSE), "' . 1 + $lootAmountFirst * $lootMultiplyFirst + $lootAmountSecond * $lootMultiplySecond + $lootAmountThird * $lootMultiplyThird + $lootAmountFourth * $lootMultiplyFourth + $lootAmountFifth * $lootMultiplyFifth . '"))))))))))))))))))))))))))))))))';
     }
 }
