@@ -1,0 +1,2 @@
+name,race,alignment,armorclass,baseHP,hitDiceTimes,hitDice,currentHP,movement,str,dex,con,int,wis,cha,proficiency,proficientSaves,proficientSkills
+Commoner,Medium humanoid (any race),Any alignment,10,0,1,8,-1,30,10,10,10,10,10,10,2,,

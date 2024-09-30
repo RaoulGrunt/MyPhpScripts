@@ -1,0 +1,2 @@
+name,race,alignment,armorclass,baseHP,hitDiceTimes,hitDice,currentHP,movement,str,dex,con,int,wis,cha,proficiency,proficientSaves,proficientSkills
+Phoenix,Half Elf,Neutral,14,44,0,6,29,30,8,18,16,18,13,14,3,sv_int;sv_wis,sk_arc;sk_his;sk_ins;sk_inv;sk_perc;sk_pers
