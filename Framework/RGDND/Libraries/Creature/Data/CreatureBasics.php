@@ -12,7 +12,7 @@ require_once FRAMEWORK_RGDND_CREATURE_UTILS . '/CreatureProfileValueUtils.php';
  * @author Raoul de Grunt
  * @package Framework\RGgames
  * @uses CreatureProfileValueUtils 1.0.0
- * @version 1.0.0
+ * @version 1.0.1
  */
 class CreatureBasics
 {
@@ -76,5 +76,4 @@ class CreatureBasics
         $this->race = CreatureProfileValueUtils::getRace($creatureProfile);
         $this->alignment = CreatureProfileValueUtils::getAlignment($creatureProfile);
     }
-
 }

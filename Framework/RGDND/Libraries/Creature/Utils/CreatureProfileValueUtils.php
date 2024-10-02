@@ -2,7 +2,7 @@
 
 namespace Framework\RGDND;
 
-require_once FRAMEWORK_RGDND_SHARED_BASECLASSES . 'ProfileValueUtilsBase.php';
+require_once FRAMEWORK_RGDND_SHARED_BASECLASSES . '/ProfileValueUtilsBase.php';
 require_once FRAMEWORK_RGDND_CREATURE_CONVERTERS . '/AbilityScoreConverter.php';
 
 /**
