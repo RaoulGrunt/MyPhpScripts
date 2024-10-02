@@ -14,12 +14,12 @@ require_once FRAMEWORK_DATABASE_DATA . '/Join.php';
  * @package Framework\Databases
  * @uses MySqlSelectQuery 1.0.0
  * @uses Join 1.0.0
- * @version 1.0.1
+ * @version 1.0.2
  */
 class DataFactory
 {
     /**
-     * Create a MySqlSelectQuery objects
+     * Create a MySqlSelectQuery object
      * 
      * @param string[] $select The select statement
      * @param string $from The from statement
