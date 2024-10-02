@@ -2,6 +2,7 @@
 
 define('FRAMEWORK_RGDND_ROOT', __DIR__ . '/..');
 define('FRAMEWORK_RGDND_LIBRARY_CREATURE_CONFIG', FRAMEWORK_RGDND_ROOT . '/Libraries/Creature/Config/config.php');
+define('FRAMEWORK_RGDND_LIBRARY_ITEM_CONFIG', FRAMEWORK_RGDND_ROOT . '/Libraries/Item/Config/config.php');
 
 define('D4', 4);
 define('D6', 6);

@@ -2,6 +2,7 @@
 
 namespace Framework\RGDND;
 
+require_once FRAMEWORK_RGDND_SHARED_BASECLASSES . 'ProfileValueUtilsBase.php';
 require_once FRAMEWORK_RGDND_CREATURE_CONVERTERS . '/AbilityScoreConverter.php';
 
 /**
@@ -11,10 +12,11 @@ require_once FRAMEWORK_RGDND_CREATURE_CONVERTERS . '/AbilityScoreConverter.php';
  *
  * @author Raoul de Grunt
  * @package Framework\RGgames
- * @uses AbilityScoreConverter
- * @version 1.0.0
+ * @uses ProfileValueUtilsBase 1.0.0
+ * @uses AbilityScoreConverter 1.0.0
+ * @version 1.0.1
  */
-class CreatureProfileValueUtils
+class CreatureProfileValueUtils extends ProfileValueUtilsBase
 {
     /**
      * Get the creature name
@@ -206,32 +208,5 @@ class CreatureProfileValueUtils
     {
         $value = self::getValue($creatureProfile, 'proficientSkills');
         return self::explodeArrayValue($value);
-    }
-
-    /**
-     * Get the specified value from the profile
-     * 
-     * @param string[] $creatureProfile
-     * @param string $index
-     * @return string
-     */
-    private static function getValue(array $creatureProfile, string $index): string
-    {
-        return $creatureProfile[$index];
-    }
-
-    /**
-     * Create an array from a value
-     * 
-     * @param string $value
-     * @return array
-     */
-    private static function explodeArrayValue(string $value): array
-    {
-        $result = array();
-        if (!empty($value)) {
-            $result = explode(';', $value);
-        }
-        return $result;
     }
 }

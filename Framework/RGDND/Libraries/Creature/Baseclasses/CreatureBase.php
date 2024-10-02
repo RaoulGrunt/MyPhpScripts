@@ -2,7 +2,7 @@
 
 namespace Framework\RGDND;
 
-require_once(FRAMEWORK_RGDND_CREATURE_FACTORIES . '/ReaderFactory.php');
+require_once(FRAMEWORK_RGDND_SHARED_FACTORIES . '/ReaderFactory.php');
 require_once(FRAMEWORK_RGDND_CREATURE_FACTORIES . '/CreatureDataFactory.php');
 require_once(FRAMEWORK_RGDND_CREATURE_FACTORIES . '/PerformerFactory.php');
 
@@ -16,7 +16,7 @@ require_once(FRAMEWORK_RGDND_CREATURE_FACTORIES . '/PerformerFactory.php');
  * @uses ReaderFactory 1.0.0
  * @uses CreatureDataFactory 1.0.0
  * @uses PerformerFactory 1.0.0
- * @version 1.0.0
+ * @version 1.0.1
  */
 abstract class CreatureBase
 {
@@ -95,8 +95,8 @@ abstract class CreatureBase
      */
     private function loadProfile(string $creatureProfileFile)
     {
-        $creatureProfileReader = ReaderFactory::createCreatureProfileReader($creatureProfileFile);
-        $creatureProfile = $creatureProfileReader->creatureProfile();
+        $profileReader = ReaderFactory::createProfileReader($creatureProfileFile);
+        $creatureProfile = $profileReader->profile();
         $this->basics = CreatureDataFactory::createCreatureBasics($creatureProfile);
         $this->statistics = CreatureDataFactory::createCreatureStatistics($creatureProfile);
         $this->saves = PerformerFactory::createCreatureSavePerformer($creatureProfile);
