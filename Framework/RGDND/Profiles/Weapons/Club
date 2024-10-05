@@ -1,0 +1,2 @@
+name,description,costamount,costcointype,weight,type,dmgdice,dmgtimes,dmgtype,properties
+Club,A standard club,1,sp,2,simple,4,1,wt_blud,Light

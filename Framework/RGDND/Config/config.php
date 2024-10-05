@@ -8,6 +8,7 @@ define('FRAMEWORK_RGDND_LIBRARY_ITEM_CONFIG', FRAMEWORK_RGDND_ROOT . '/Libraries
 define('FRAMEWORK_RGDND_PROFILE_ITEMS', FRAMEWORK_RGDND_ROOT . '/Profiles/Items');
 define('FRAMEWORK_RGDND_PROFILE_CHARACTERS', FRAMEWORK_RGDND_ROOT . '/Profiles/Characters');
 define('FRAMEWORK_RGDND_PROFILE_MONSTERS', FRAMEWORK_RGDND_ROOT . '/Profiles/Monsters');
+define('FRAMEWORK_RGDND_PROFILE_WEAPONS', FRAMEWORK_RGDND_ROOT . '/Profiles/Weapons');
 
 define('D4', 4);
 define('D6', 6);
@@ -67,3 +68,6 @@ define('MONEY_ELECTRUM', 'ep');
 define('MONEY_GOLD', 'gp');
 define('MONEY_PLATINUM', 'pp');
 
+define('WEAPON_TYPE_BLUDGEONING', 'wt_blud');
+define('WEAPON_TYPE_SLASHING', 'wt_slash');
+define('WEAPON_TYPE_PIERCING', 'wt_pierce');
