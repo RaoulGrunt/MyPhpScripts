@@ -3,6 +3,7 @@
 namespace Framework\RGDND;
 
 require_once FRAMEWORK_RGDND_ITEM_UTILS . '/ItemProfileValueUtils.php';
+require_once FRAMEWORK_RGDND_ITEM_FACTORIES . '/ItemDataFactory.php';
 
 /**
  * ItemBasics
@@ -11,8 +12,8 @@ require_once FRAMEWORK_RGDND_ITEM_UTILS . '/ItemProfileValueUtils.php';
  *
  * @author Raoul de Grunt
  * @package Framework\RGgames
- * @uses ItemProfileValueUtils 1.0.0
- * @version 1.0.0
+ * @uses ItemProfileValueUtils 1.1.0
+ * @version 1.1.0
  */
 class ItemBasics
 {
@@ -20,6 +21,10 @@ class ItemBasics
     private string $name;
     /** @var string $description The description of the item */
     private string $description;
+    /** @var Coins $cost The normal cost of the item */
+    private Coins $cost;
+    /** @var int $weight The weight of the item */
+    private int $weight;
 
     /**
      * Constructor
@@ -54,6 +59,26 @@ class ItemBasics
     }
 
     /**
+     * Get the cost
+     * 
+     * @return Coins
+     */
+    public function cost(): Coins
+    {
+        return $this->cost;
+    }
+
+    /**
+     * Get the weight
+     * 
+     * @return int
+     */
+    public function weight(): int
+    {
+        return $this->weight;
+    }
+
+    /**
      * Load the basics from the specified profile
      * 
      * @param string[] $itemProfile The profile to load the basics from
@@ -62,5 +87,9 @@ class ItemBasics
     {
         $this->name = ItemProfileValueUtils::getName($itemProfile);
         $this->description = ItemProfileValueUtils::getDescription($itemProfile);
+        $costAmount = ItemProfileValueUtils::getCostAmount($itemProfile);
+        $costCoinType = ItemProfileValueUtils::getCostCoinType($itemProfile);
+        $this->cost = ItemDataFactory::createCoins($costAmount, $costCoinType);
+        $this->weight = ItemProfileValueUtils::getWeight($itemProfile);
     }
 }

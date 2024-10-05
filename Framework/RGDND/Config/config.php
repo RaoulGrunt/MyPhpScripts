@@ -55,3 +55,10 @@ define('SKILL_RELIGION', 'sk_rel');
 define('SKILL_SLEIGHT_OF_HAND', 'sk_soh');
 define('SKILL_STEALTH', 'sk_ste');
 define('SKILL_SURVIVAL', 'sk_sur');
+
+define('MONEY_COPPER', 'cp');
+define('MONEY_SILVER', 'sp');
+define('MONEY_ELECTRUM', 'ep');
+define('MONEY_GOLD', 'gp');
+define('MONEY_PLATINUM', 'pp');
+
