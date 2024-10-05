@@ -9,14 +9,14 @@ require_once FRAMEWORK_RGDND_CREATURE_PRINTERS . '/CheckPrinter.php';
 /**
  * CreatureSavePerformer
  * 
- * A performer class for creature actions
+ * A performer class for creature saves
  *
  * @author Raoul de Grunt
  * @package Framework\RGgames
  * @uses CreatureSaves 1.0.0
  * @uses DiceRoller 1.0.0
  * @uses CheckPrinter 1.0.0
- * @version 1.0.0
+ * @version 1.0.1
  */
 class CreatureSavePerformer extends CreatureSaves
 {

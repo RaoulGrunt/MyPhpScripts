@@ -7,7 +7,7 @@ require_once(FRAMEWORK_RGDND_CREATURE_FACTORIES . '/CreatureDataFactory.php');
 require_once(FRAMEWORK_RGDND_CREATURE_FACTORIES . '/PerformerFactory.php');
 
 /**
- * Creature
+ * CreatureBase
  * 
  * A creature in the world
  *
@@ -16,7 +16,7 @@ require_once(FRAMEWORK_RGDND_CREATURE_FACTORIES . '/PerformerFactory.php');
  * @uses ReaderFactory 1.0.0
  * @uses CreatureDataFactory 1.0.0
  * @uses PerformerFactory 1.0.0
- * @version 1.0.1
+ * @version 1.0.2
  */
 abstract class CreatureBase
 {
