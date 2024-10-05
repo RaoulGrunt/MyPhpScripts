@@ -1,8 +1,13 @@
 <?php
 
 define('FRAMEWORK_RGDND_ROOT', __DIR__ . '/..');
+
 define('FRAMEWORK_RGDND_LIBRARY_CREATURE_CONFIG', FRAMEWORK_RGDND_ROOT . '/Libraries/Creature/Config/config.php');
 define('FRAMEWORK_RGDND_LIBRARY_ITEM_CONFIG', FRAMEWORK_RGDND_ROOT . '/Libraries/Item/Config/config.php');
+
+define('FRAMEWORK_RGDND_PROFILE_ITEMS', FRAMEWORK_RGDND_ROOT . '/Profiles/Items');
+define('FRAMEWORK_RGDND_PROFILE_CHARACTERS', FRAMEWORK_RGDND_ROOT . '/Profiles/Characters');
+define('FRAMEWORK_RGDND_PROFILE_MONSTERS', FRAMEWORK_RGDND_ROOT . '/Profiles/Monsters');
 
 define('D4', 4);
 define('D6', 6);
