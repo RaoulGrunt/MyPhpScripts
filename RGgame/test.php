@@ -6,7 +6,7 @@ require_once __DIR__ . '/Config/config.php';
 require_once FRAMEWORK_RGDND_ROOT . '/Item.php';
 use Framework\RGDND\Item;
 
-$ropeProfile = __DIR__ . '/Profiles/Items/RopeHempen';
+$ropeProfile = FRAMEWORK_RGDND_PROFILE_ITEMS . '/RopeHempen';
 $rope = new Item($ropeProfile);
 
 print('The ' . $rope->name() . ' is a ' . $rope->description() . ', that costs ' . $rope->cost()->amount() . $rope->cost()->type() . ' and weighs ' . $rope->weight() . ' lb' . PHP_EOL);
