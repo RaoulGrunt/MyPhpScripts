@@ -7,9 +7,9 @@ define('SAVES_ABILITY', serialize(array(SAVE_STRENGTH => 'str_mod',
                                         SAVE_WISDOM => 'wis_mod',
                                         SAVE_CHARISMA => 'cha_mod')));
 
-define('SENSES_ABILITY', serialize(array(SKILL_INSIGHT => 'wis_mod',
-                                         SKILL_INVESTIGATION => 'int_mod',
-                                         SKILL_PERCEPTION => 'wis_mod')));
+define('SENSES_ABILITY', serialize(array(SENSE_INSIGHT => 'wis_mod',
+                                         SENSE_INVESTIGATION => 'int_mod',
+                                         SENSE_PERCEPTION => 'wis_mod')));
 
 define('SKILLS_ABILITY', serialize(array(SKILL_ACROBATICS => 'dex_mod',
                                          SKILL_ANIMAL_HANDLING => 'wis_mod',

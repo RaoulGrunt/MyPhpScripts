@@ -39,9 +39,9 @@ define('SAVE_INTELLIGENCE', 'sv_int');
 define('SAVE_WISDOM', 'sv_wis');
 define('SAVE_CHARISMA', 'sv_cha');
 
-define('SENSE_PERCEPTION', 'se_perc');
-define('SENSE_INVESTIGATION', 'se_inv');
-define('SENSE_INSIGHT', 'se_ins');
+define('SENSE_PERCEPTION', 'sk_perc');
+define('SENSE_INVESTIGATION', 'sk_inv');
+define('SENSE_INSIGHT', 'sk_ins');
 
 define('SKILL_ACROBATICS', 'sk_acr');
 define('SKILL_ANIMAL_HANDLING', 'sk_ani');
