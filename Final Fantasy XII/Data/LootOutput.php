@@ -14,7 +14,7 @@ require_once SCRIPT_CONVERTERS . '/NeededToTurnInValueConverter.php';
  * @uses OutputBase 1.0.0
  * @uses SellUpToValueConverter 1.0.0
  * @uses NeededToTurnInValueConverter 1.0.0
- * @version 1.3.1
+ * @version 1.3.2
  */
 class LootOutput extends OutputBase
 {
@@ -63,8 +63,8 @@ class LootOutput extends OutputBase
     {
         $result = array();
         $result[] = SellUpToValueConverter::convertToSellUpToString($this->bazaarLoot);
-        foreach($this->bazaarLoot as $bazaarItemLoot) {
-            $result[] = NeededToTurnInValueConverter::convertToNeededToTurnInString($bazaarItemLoot);
+        foreach($this->bazaarLoot as $bazaarLootItem) {
+            $result[] = NeededToTurnInValueConverter::convertToNeededToTurnInString($bazaarLootItem);
         }
         return $result;
     }
