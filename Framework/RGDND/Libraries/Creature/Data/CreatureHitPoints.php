@@ -12,7 +12,7 @@ require_once FRAMEWORK_RGDND_CREATURE_UTILS . '/CreatureProfileValueUtils.php';
  * @author Raoul de Grunt
  * @package Framework\RGgames
  * @uses CreatureProfileValueUtils 1.0.0
- * @version 1.0.0
+ * @version 1.0.1
  */
 class CreatureHitPoints
 {
@@ -61,6 +61,6 @@ class CreatureHitPoints
     private function loadFromProfile(array $creatureProfile)
     {
         $this->maxHitpoints = CreatureProfileValueUtils::getMaxHP($creatureProfile);
-        $this->currentHitpoints = CreatureProfileValueUtils::getCurrentHP($creatureProfile);
+        $this->currentHitpoints = CreatureProfileValueUtils::getCurrentHP($creatureProfile, $this->maxHitpoints);
     }
 }
