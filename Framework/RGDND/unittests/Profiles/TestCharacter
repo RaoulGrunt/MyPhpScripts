@@ -1,0 +1,2 @@
+name,race,alignment,armorclass,baseHP,hitDiceTimes,hitDice,currentHP,movement,str,dex,con,int,wis,cha,proficiency,proficientSaves,proficientSkills
+TestChar,Human,Neutral,14,44,0,6,29,30,12,15,16,18,20,23,2,sv_int;sv_wis;sv_cha,sk_acr;sk_ani;sk_arc;sk_ath;sk_dec;sk_his;sk_ins;sk_int;sk_inv

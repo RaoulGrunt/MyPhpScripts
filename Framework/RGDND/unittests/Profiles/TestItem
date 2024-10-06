@@ -1,0 +1,2 @@
+name,description,costamount,costcointype,weight
+TestItem,This is a unit test item,1,gp,10
