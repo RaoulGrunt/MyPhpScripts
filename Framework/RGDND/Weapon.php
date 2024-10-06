@@ -14,7 +14,7 @@ require_once(FRAMEWORK_RGDND_ITEM_FACTORIES . '/WeaponPerformerFactory.php');
  * @author Raoul de Grunt
  * @package Framework\RGgames
  * @uses Item 1.0.0
- * @version 1.0.0
+ * @version 1.0.1
  */
 class Weapon extends Item
 {
@@ -30,6 +30,7 @@ class Weapon extends Item
      */
     public function __construct(string $weaponProfileFile)
     {
+        parent::__construct($weaponProfileFile);
         $this->loadProfile($weaponProfileFile);
     }
 
