@@ -12,10 +12,21 @@ require_once FRAMEWORK_RGDND_SHARED_BASECLASSES . '/ProfileValueUtilsBase.php';
  * @author Raoul de Grunt
  * @package Framework\RGgames
  * @uses ProfileValueUtilsBase 1.0.0
- * @version 1.0.0
+ * @version 1.1.0
  */
 class WeaponProfileValueUtils extends ProfileValueUtilsBase
 {
+    /**
+     * Get the type
+     * 
+     * @param string[] $weaponProfile The unpacked weapon profile
+     * @return string
+     */
+    public static function getType(array $weaponProfile): string
+    {
+        return self::getValue($weaponProfile, 'type');
+    }
+    
     /**
      * Get the damage dice
      * 
@@ -47,5 +58,17 @@ class WeaponProfileValueUtils extends ProfileValueUtilsBase
     public static function getDamageType(array $weaponProfile): string
     {
         return self::getValue($weaponProfile, 'dmgtype');
+    }
+
+    /**
+     * Get the properties
+     * 
+     * @param string[] $weaponProfile The unpacked weapon profile
+     * @return string[]
+     */
+    public static function getProperties(array $weaponProfile): array
+    {
+        $value = self::getValue($weaponProfile, 'properties');
+        return self::explodeArrayValue($value);
     }
 }

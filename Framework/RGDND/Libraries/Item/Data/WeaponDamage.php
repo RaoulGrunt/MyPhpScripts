@@ -12,7 +12,7 @@ require_once FRAMEWORK_RGDND_ITEM_UTILS . '/WeaponProfileValueUtils.php';
  * @author Raoul de Grunt
  * @package Framework\RGgames
  * @uses WeaponProfileValueUtils 1.0.0
- * @version 1.0.0
+ * @version 1.1.0
  */
 class WeaponDamage
 {
@@ -52,7 +52,7 @@ class WeaponDamage
      */
     public function damageTimes(): int
     {
-        return $this->damageTimes();
+        return $this->damageTimes;
     }
 
     /**
@@ -60,9 +60,9 @@ class WeaponDamage
      * 
      * @return string
      */
-    public function damageType(): int
+    public function damageType(): string
     {
-        return $this->damageType();
+        return $this->damageType;
     }
 
     /**

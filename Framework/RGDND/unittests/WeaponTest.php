@@ -34,6 +34,9 @@ class WeaponTest extends TestCase
         $this->assertEquals(1, $testClass->cost()->amount(), 'Cost Amount FAILED: 1 vs ' . $testClass->cost()->amount());
         $this->assertEquals('sp', $testClass->cost()->type(), 'Cost Type: sp vs ' . $testClass->cost()->type());
         $this->assertEquals(2, $testClass->weight(), 'Weight FAILED: 2 vs ' . $testClass->weight());
+        $this->assertEquals(WEAPON_TYPE_SIMPLE, $testClass->type(), 'Weapon Type: ' . WEAPON_TYPE_SIMPLE . ' vs ' . $testClass->type());
+        $this->assertEquals(1, count($testClass->properties()), 'Number of weapon properties FAILED: 1 vs ' . count($testClass->properties()));
+        $this->assertEquals(WEAPON_PROPERY_LIGHT, $testClass->properties()[0], 'Weapon property FAILED: ' . WEAPON_PROPERY_LIGHT . ' vs ' . $testClass->properties()[0]);
     }
 
     /**
@@ -44,7 +47,8 @@ class WeaponTest extends TestCase
         $testClass = new Weapon($this->profile);
         for($i = 0; $i < 40; $i++) {
             $damage = $testClass->rollDamage();
-            $this->assertEqualsWithDelta(1, $damage, 3, 'Damage FAILED: 1-4 vs ' . $damage);
+            $this->assertEqualsWithDelta(1, $damage->amount(), 3, 'Damage FAILED: 1-4 vs ' . $damage->amount());
+            $this->assertEquals(DAMAGE_TYPE_BLUDGEONING, $damage->type(), 'Damage Type: ' . DAMAGE_TYPE_BLUDGEONING . ' vs ' . $damage->type());
         }
     }
 }

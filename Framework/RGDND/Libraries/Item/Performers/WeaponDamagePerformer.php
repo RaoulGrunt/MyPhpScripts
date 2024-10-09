@@ -4,6 +4,7 @@ namespace Framework\RGDND;
 
 require_once FRAMEWORK_RGDND_ITEM_DATA . '/WeaponDamage.php';
 require_once FRAMEWORK_RGDND_ROOT . '/DiceRoller.php';
+require_once FRAMEWORK_RGDND_SHARED_FACTORIES . '/SharedDataFactory.php';
 
 /**
  * WeaponDamagePerformer
@@ -12,9 +13,10 @@ require_once FRAMEWORK_RGDND_ROOT . '/DiceRoller.php';
  *
  * @author Raoul de Grunt
  * @package Framework\RGgames
- * @uses WeaponDamage 1.0.0
+ * @uses WeaponDamage 1.1.0
  * @uses DiceRoller 1.0.0
- * @version 1.0.0
+ * @uses SharedDataFactory 1.0.0
+ * @version 1.1.0
  */
 class WeaponDamagePerformer extends WeaponDamage
 {
@@ -33,11 +35,11 @@ class WeaponDamagePerformer extends WeaponDamage
     /**
      * Perform the damage roll
      * 
-     * @return int
+     * @return Damage
      */
-    public function roll(): int
+    public function roll(): Damage
     {
-        // ToDo: Create a damage object with amount of damage and type
-        return DiceRoller::roll($this->damageDice());
+        $damageAmount =  DiceRoller::rollMultiple($this->damageDice(), $this->damageTimes());
+        return SharedDataFactory::createDamage($damageAmount, $this->damageType());        
     }
 }

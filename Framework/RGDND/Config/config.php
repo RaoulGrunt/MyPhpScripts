@@ -68,6 +68,31 @@ define('MONEY_ELECTRUM', 'ep');
 define('MONEY_GOLD', 'gp');
 define('MONEY_PLATINUM', 'pp');
 
-define('WEAPON_TYPE_BLUDGEONING', 'wt_blud');
-define('WEAPON_TYPE_SLASHING', 'wt_slash');
-define('WEAPON_TYPE_PIERCING', 'wt_pierce');
+define('DAMAGE_TYPE_ACID', 'dt_acid');
+define('DAMAGE_TYPE_BLUDGEONING', 'dt_blud');
+define('DAMAGE_TYPE_COLD', 'dt_cold');
+define('DAMAGE_TYPE_FIRE', 'dt_fire');
+define('DAMAGE_TYPE_FORCE', 'dt_force');
+define('DAMAGE_TYPE_LIGHTNING', 'dt_lightning');
+define('DAMAGE_TYPE_NECROTIC', 'dt_necrotic');
+define('DAMAGE_TYPE_PIERCING', 'dt_pierce');
+define('DAMAGE_TYPE_POISON', 'dt_poison');
+define('DAMAGE_TYPE_PSYCHIC', 'dt_psychic');
+define('DAMAGE_TYPE_RADIANT', 'dt_radiant');
+define('DAMAGE_TYPE_SLASHING', 'dt_slash');
+define('DAMAGE_TYPE_THUNDER', 'dt_thunder');
+
+define('WEAPON_TYPE_SIMPLE', 'wt_simple');
+define('WEAPON_TYPE_MARTIAL', 'wt_martial');
+
+define('WEAPON_PROPERY_AMMUNITION', 'wp_ammunition');
+define('WEAPON_PROPERY_FINESSE', 'wp_finesse');
+define('WEAPON_PROPERY_HEAVY', 'wp_heavy');
+define('WEAPON_PROPERY_LIGHT', 'wp_light');
+define('WEAPON_PROPERY_LOADING', 'wp_loading');
+define('WEAPON_PROPERY_RANGE', 'wp_range');
+define('WEAPON_PROPERY_REACH', 'wp_reach');
+define('WEAPON_PROPERY_SPECIAL', 'wp_special');
+define('WEAPON_PROPERY_THROWN', 'wp_thrown');
+define('WEAPON_PROPERY_TWO_HANDED', 'wp_two_handed');
+define('WEAPON_PROPERY_VERSATILE', 'wp_versatile');

@@ -11,8 +11,8 @@ require_once FRAMEWORK_RGDND_ITEM_PERFORMERS . '/WeaponDamagePerformer.php';
  *
  * @author Raoul de Grunt
  * @package Framework\RGgames
- * @uses WeaponDamage 1.0.0
- * @version 1.0.0
+ * @uses WeaponDamagePerformer 1.1.0
+ * @version 1.0.1
  */
 class WeaponPeformerFactory
 {
