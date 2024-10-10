@@ -36,7 +36,7 @@ class WeaponTest extends TestCase
         $this->assertEquals(2, $testClass->weight(), 'Weight FAILED: 2 vs ' . $testClass->weight());
         $this->assertEquals(WEAPON_TYPE_SIMPLE, $testClass->type(), 'Weapon Type: ' . WEAPON_TYPE_SIMPLE . ' vs ' . $testClass->type());
         $this->assertEquals(1, count($testClass->properties()), 'Number of weapon properties FAILED: 1 vs ' . count($testClass->properties()));
-        $this->assertEquals(WEAPON_PROPERY_LIGHT, $testClass->properties()[0], 'Weapon property FAILED: ' . WEAPON_PROPERY_LIGHT . ' vs ' . $testClass->properties()[0]);
+        $this->assertEquals(WEAPON_PROPERTY_LIGHT, $testClass->properties()[0], 'Weapon property FAILED: ' . WEAPON_PROPERTY_LIGHT . ' vs ' . $testClass->properties()[0]);
     }
 
     /**

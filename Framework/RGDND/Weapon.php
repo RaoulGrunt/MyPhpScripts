@@ -4,8 +4,7 @@ namespace Framework\RGDND;
 
 require_once(FRAMEWORK_RGDND_LIBRARY_ITEM_CONFIG);
 require_once(FRAMEWORK_RGDND_ROOT . '/Item.php');
-require_once FRAMEWORK_RGDND_ITEM_UTILS . '/WeaponProfileValueUtils.php';
-require_once(FRAMEWORK_RGDND_ITEM_FACTORIES . '/WeaponPerformerFactory.php');
+require_once(FRAMEWORK_RGDND_ITEM_FACTORIES . '/WeaponDataFactory.php');
 
 /**
  * Weapon
@@ -15,18 +14,13 @@ require_once(FRAMEWORK_RGDND_ITEM_FACTORIES . '/WeaponPerformerFactory.php');
  * @author Raoul de Grunt
  * @package Framework\RGgames
  * @uses Item 1.0.0
- * @uses WeaponProfileValueUtils 1.1.0
- * @uses WeaponPerformerFactory 1.0.0
- * @version 1.1.0
+ * @uses WeaponDataFactory 1.0.0
+ * @version 1.1.1
  */
 class Weapon extends Item
 {
-    /** @var  string $type The weapon type */
-    private string $type;
-    /** @var WeaponDamagePerformer $damage The damage and type the weapon can do */
-    private WeaponDamagePerformer $damage;
-    /** @var string[] $properties The properties of the weapon */
-    private array $properties;
+    /** @var WeaponBasics $weaponBasics The basics of the weapon */
+    private WeaponBasics $weaponBasics;
 
     /**
      * Constructor
@@ -38,7 +32,7 @@ class Weapon extends Item
     public function __construct(string $weaponProfileFile)
     {
         parent::__construct($weaponProfileFile);
-        $this->loadProfile($weaponProfileFile);
+        $this->loadFromProfile($weaponProfileFile);
     }
 
     /**
@@ -48,7 +42,7 @@ class Weapon extends Item
      */
     public function type(): string
     {
-        return $this->type;
+        return $this->weaponBasics->type();
     }
 
     /**
@@ -58,7 +52,7 @@ class Weapon extends Item
      */
     public function rollDamage(): Damage
     {
-        return $this->damage->roll();
+        return $this->weaponBasics->rollDamage();
     }
 
     /**
@@ -68,7 +62,7 @@ class Weapon extends Item
      */
     public function properties(): array
     {
-        return $this->properties;
+        return $this->weaponBasics->properties();
     }
 
     /**
@@ -76,12 +70,10 @@ class Weapon extends Item
      * 
      * @param string $weaponProfileFile The location of the creature profile to load
      */
-    private function loadProfile(string $weaponProfileFile)
+    private function loadFromProfile(string $weaponProfileFile)
     {
         $profileReader = ReaderFactory::createProfileReader($weaponProfileFile);
         $weaponProfile = $profileReader->profile();
-        $this->type = WeaponProfileValueUtils::getType($weaponProfile);
-        $this->damage = WeaponPeformerFactory::createWeaponDamagePerformer($weaponProfile);
-        $this->properties = WeaponProfileValueUtils::getProperties($weaponProfile);
+        $this->weaponBasics = WeaponDataFactory::createWeaponBasics($weaponProfile);
     }    
 }

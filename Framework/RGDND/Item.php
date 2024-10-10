@@ -15,12 +15,12 @@ require_once(FRAMEWORK_RGDND_ITEM_FACTORIES . '/ItemDataFactory.php');
  * @package Framework\RGgames
  * @uses ReaderFactory 1.0.0
  * @uses ItemDataFactory 1.1.0
- * @version 1.0.0
+ * @version 1.0.1
  */
 class Item
 {
-    /** @var ItemBasics $basics The basic of the item */
-    protected ItemBasics $basics;
+    /** @var ItemBasics $basics The basics of the item */
+    protected ItemBasics $itemBasics;
 
     /**
      * Constructor
@@ -31,7 +31,7 @@ class Item
      */
     public function __construct(string $itemProfileFile)
     {
-        $this->loadProfile($itemProfileFile);
+        $this->loadFromProfile($itemProfileFile);
     }
 
     /**
@@ -41,7 +41,7 @@ class Item
      */
     public function name(): string
     {
-        return $this->basics->name();
+        return $this->itemBasics->name();
     }
 
     /**
@@ -51,7 +51,7 @@ class Item
      */
     public function description(): string
     {
-        return $this->basics->description();
+        return $this->itemBasics->description();
     }
 
     /**
@@ -61,7 +61,7 @@ class Item
      */
     public function cost(): Coins
     {
-        return $this->basics->cost();
+        return $this->itemBasics->cost();
     }
 
     /**
@@ -71,7 +71,7 @@ class Item
      */
     public function weight(): int
     {
-        return $this->basics->weight();
+        return $this->itemBasics->weight();
     }
 
     /**
@@ -79,10 +79,10 @@ class Item
      * 
      * @param string $itemProfileFile The location of the item profile to load
      */
-    private function loadProfile(string $itemProfileFile)
+    private function loadFromProfile(string $itemProfileFile)
     {
         $profileReader = ReaderFactory::createProfileReader($itemProfileFile);
         $itemProfile = $profileReader->profile();
-        $this->basics = ItemDataFactory::createItemBasics($itemProfile);
+        $this->itemBasics = ItemDataFactory::createItemBasics($itemProfile);
     }
 }
