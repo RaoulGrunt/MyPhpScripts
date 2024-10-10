@@ -16,7 +16,7 @@ require_once(FRAMEWORK_RGDND_CREATURE_FACTORIES . '/PerformerFactory.php');
  * @uses ReaderFactory 1.0.0
  * @uses CreatureDataFactory 1.0.0
  * @uses PerformerFactory 1.0.0
- * @version 1.0.2
+ * @version 1.0.3
  */
 abstract class CreatureBase
 {
@@ -40,7 +40,7 @@ abstract class CreatureBase
      */
     public function __construct(string $creatureProfileFile)
     {
-        $this->loadProfile($creatureProfileFile);
+        $this->loadFromProfile($creatureProfileFile);
     }
 
     /**
@@ -93,7 +93,7 @@ abstract class CreatureBase
      * 
      * @param string $creatureProfileFile The location of the creature profile to load
      */
-    private function loadProfile(string $creatureProfileFile)
+    private function loadFromProfile(string $creatureProfileFile)
     {
         $profileReader = ReaderFactory::createProfileReader($creatureProfileFile);
         $creatureProfile = $profileReader->profile();
