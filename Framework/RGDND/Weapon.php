@@ -15,7 +15,7 @@ require_once(FRAMEWORK_RGDND_ITEM_FACTORIES . '/WeaponDataFactory.php');
  * @package Framework\RGgames
  * @uses Item 1.0.0
  * @uses WeaponDataFactory 1.0.0
- * @version 1.1.1
+ * @version 1.1.2
  */
 class Weapon extends Item
 {
@@ -68,7 +68,7 @@ class Weapon extends Item
     /**
      * Load the specified profile
      * 
-     * @param string $weaponProfileFile The location of the creature profile to load
+     * @param string $weaponProfileFile The location of the weapon profile to load
      */
     private function loadFromProfile(string $weaponProfileFile)
     {
