@@ -9,20 +9,35 @@ namespace Framework\RGDND;
  *
  * @author Raoul de Grunt
  * @package Framework\RGgames
- * @version 1.0.0
+ * @version 1.1.0
  */
 abstract class ProfileValueUtilsBase
 {
     /**
-     * Get the specified value from the profile
+     * Get the type
      * 
-     * @param string[] $creatureProfile
-     * @param string $index
+     * @param string[] $weaponProfile The unpacked weapon profile
      * @return string
      */
-    protected static function getValue(array $creatureProfile, string $index): string
+    public static function getType(array $weaponProfile): string
     {
-        return $creatureProfile[$index];
+        return self::getValue($weaponProfile, 'type');
+    }
+
+    /**
+     * Get the specified value from the profile
+     * 
+     * @param string[] $profile
+     * @param string $index
+     * @return string
+     * @throws \Exception
+     */
+    protected static function getValue(array $profile, string $index): string
+    {
+        if (!array_key_exists($index, $profile)) {
+            throw new \Exception('The requested index "' . $index . '" is not present in the profile');
+        }
+        return $profile[$index];
     }
 
     /**

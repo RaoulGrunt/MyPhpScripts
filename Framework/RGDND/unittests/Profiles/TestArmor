@@ -1,0 +1,2 @@
+name,description,costamount,costcointype,weight,type,ac,maxDexMod,strReq,stealthDis
+TestArmor,This is a unit test armor,5,gp,8,at_light,11,99,0,1
