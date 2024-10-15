@@ -16,6 +16,8 @@ class CharacterTest extends TestCase
     private string $profile;
     /** @var string[] $unpackedProfile The unpacked profile */
     private array $unpackedProfile;
+    /** @var Character $testClass The character object to test */
+    private Character $testClass;
 
     /**
      * Set the class variables
@@ -25,6 +27,7 @@ class CharacterTest extends TestCase
         $this->profile = __DIR__ . '/Profiles/TestCharacter';
         $profileReader = ReaderFactory::createProfileReader($this->profile);
         $this->unpackedProfile = $profileReader->profile();
+        $this->testClass = new Character($this->profile);
     }
 
     /**
@@ -32,8 +35,7 @@ class CharacterTest extends TestCase
      */
     public function testLoadCharacter()
     {
-        $testClass = new Character($this->profile);
-        $this->assertEquals('TestChar', $testClass->name(), 'Name FAILED: TestChar vs ' . $testClass->name());
+        $this->assertEquals('TestChar', $this->testClass->name(), 'Name FAILED: TestChar vs ' . $this->testClass->name());
     }
 
     /**
@@ -144,5 +146,16 @@ class CharacterTest extends TestCase
         $this->assertEquals(15, $testClass->getValueFor(SENSE_PERCEPTION), 'Passive Perception FAILED: 15 vs ' . $testClass->getValueFor(SENSE_PERCEPTION));
         $this->assertEquals(16, $testClass->getValueFor(SENSE_INVESTIGATION), 'Passive Investigation FAILED: 16 vs ' . $testClass->getValueFor(SENSE_INVESTIGATION));
         $this->assertEquals(17, $testClass->getValueFor(SENSE_INSIGHT), 'Passive Insight FAILED: 17 vs ' . $testClass->getValueFor(SENSE_INSIGHT));
+    }
+
+    /**
+     * Test if the initiative roll is correct
+     */
+    public function testRollInitiative()
+    {
+        for($i = 0; $i < 200; $i++) {
+            $initiative = $this->testClass->rollInitiative();
+            $this->assertThat($initiative, $this->logicalAnd($this->greaterThan(2), $this->lessThan(24)), 'Initiative FAILED: 3-23 vs ' . $initiative);
+        }
     }
 }

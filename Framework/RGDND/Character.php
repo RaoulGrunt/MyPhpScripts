@@ -14,10 +14,10 @@ require_once(FRAMEWORK_RGDND_CREATURE_PRINTERS . '/CharacterSheetPrinter.php');
  *
  * @author Raoul de Grunt
  * @package Framework\RGgames
- * @uses CreatureBase 1.0.0
+ * @uses CreatureBase 1.1.0
  * @uses CreatureDataFactory 1.0.0
  * @uses CharacterSheetPrinter 1.0.0
- * @version 1.0.0
+ * @version 1.0.1
  */
 class Character extends CreatureBase
 {

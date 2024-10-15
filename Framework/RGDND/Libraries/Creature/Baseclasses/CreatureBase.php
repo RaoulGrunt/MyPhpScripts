@@ -16,7 +16,7 @@ require_once(FRAMEWORK_RGDND_CREATURE_FACTORIES . '/PerformerFactory.php');
  * @uses ReaderFactory 1.0.0
  * @uses CreatureDataFactory 1.0.0
  * @uses PerformerFactory 1.0.0
- * @version 1.0.3
+ * @version 1.1.0
  */
 abstract class CreatureBase
 {
@@ -86,6 +86,16 @@ abstract class CreatureBase
     public function performSkill(string $skill, int $dc): bool
     {
         return $this->skills->perform($skill, $dc);
+    }
+
+    /**
+     * Roll for initiative
+     * 
+     * @return int
+     */
+    public function rollInitiative(): int
+    {
+        return DiceRoller::roll(D20) + $this->statistics->abilityModifiers()->getScoreFor(MODIFIER_DEXTERITY);
     }
 
     /**
