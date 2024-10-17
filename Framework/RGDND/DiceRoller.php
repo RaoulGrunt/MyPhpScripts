@@ -9,7 +9,7 @@ namespace Framework\RGDND;
  *
  * @author Raoul de Grunt
  * @package Framework\RGgames
- * @version 1.0.0
+ * @version 1.1.0
  */
 class DiceRoller
 {
@@ -59,7 +59,7 @@ class DiceRoller
     public static function rollMultiple(int $dice, int $times): int
     {
         $result = 0;
-        for($i = 0; $i++; $i <= $times)
+        for($i = 1; $i <= $times; $i++)
         {
             $result += rand(1, $dice);
         }

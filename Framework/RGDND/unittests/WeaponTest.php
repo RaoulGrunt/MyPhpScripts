@@ -47,7 +47,7 @@ class WeaponTest extends TestCase
         $testClass = new Weapon($this->profile);
         for($i = 0; $i < 40; $i++) {
             $damage = $testClass->rollDamage();
-            $this->assertEqualsWithDelta(1, $damage->amount(), 3, 'Damage FAILED: 1-4 vs ' . $damage->amount());
+            $this->assertThat($damage->amount(), $this->logicalAnd($this->greaterThan(0), $this->lessThan(5)), 'Damage FAILED: 1-4 vs ' . $damage->amount());
             $this->assertEquals(DAMAGE_TYPE_BLUDGEONING, $damage->type(), 'Damage Type: ' . DAMAGE_TYPE_BLUDGEONING . ' vs ' . $damage->type());
         }
     }

@@ -14,9 +14,9 @@ require_once FRAMEWORK_RGDND_SHARED_FACTORIES . '/SharedDataFactory.php';
  * @author Raoul de Grunt
  * @package Framework\RGgames
  * @uses WeaponDamage 1.1.0
- * @uses DiceRoller 1.0.0
+ * @uses DiceRoller 1.1.0
  * @uses SharedDataFactory 1.0.0
- * @version 1.1.0
+ * @version 1.1.1
  */
 class WeaponDamagePerformer extends WeaponDamage
 {
@@ -39,7 +39,7 @@ class WeaponDamagePerformer extends WeaponDamage
      */
     public function roll(): Damage
     {
-        $damageAmount =  DiceRoller::rollMultiple($this->damageDice(), $this->damageTimes());
+        $damageAmount = DiceRoller::rollMultiple($this->damageDice(), $this->damageTimes());
         return SharedDataFactory::createDamage($damageAmount, $this->damageType());        
     }
 }
